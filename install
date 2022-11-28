@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-apt-get update && apt-get upgrade -y
-pkg i wget git nmap termux-api openssh
+apt-get update && apt-get upgrade -y && echo "" && wait
+pkg i -y wget git nmap termux-api openssh nodejs
+clear
