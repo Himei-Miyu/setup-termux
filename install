@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get update && apt-get --yes --force-yes full-upgrade;
+apt-get update && apt-get -y full-upgrade;
 pkg i -y zip dnsutils termux-services whois tracepath traceroute wget git nmap termux-api openssh nodejs;
 clear;
 echo "Install completed"
