@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt update && apt -y dist-upgrade
+apt update
 apt install -y gnupg nano
 sed -i 's/jammy/focal/g' /etc/apt/sources.list
 echo "Package: *
