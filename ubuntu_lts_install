@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-apt update && apt -y dist-upgrade
+apt update
 pkg i -y proot-distro
-proot-distro install ubuntu
-proot-distro login ubuntu
-apt update && apt -y dist-upgrade
+proot-distro install ubuntu && wait
+proot-distro login ubuntu && wait
+apt update && apt -y full-upgrade
