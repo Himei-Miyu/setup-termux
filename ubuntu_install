@@ -1,0 +1,7 @@
+#! /usr/bin/bash
+
+apt update && apt -y dist-upgrade
+pkg i -y proot-distro
+proot-distro install ubuntu
+proot-distro login ubuntu
+apt update && apt -y dist-upgrade
