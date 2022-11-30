@@ -16,3 +16,7 @@ curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu22to
 ```bash
 curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/mongodb_full_install -o /tmp/db && . /tmp/db
 ```
+NO PUBLICKEY
+```bash
+apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-key {key}
+```
