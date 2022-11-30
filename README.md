@@ -12,3 +12,7 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu_
 ```bash
 curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu22to20_install -o /tmp/t && . /tmp/t
 ```
+- [MongoDB_full_install](https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/mongodb_full_install)
+```bash
+curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/mongodb_full_install -o /tmp/db && . /tmp/db
+```
