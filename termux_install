@@ -5,4 +5,4 @@ _0=( "\e[0m" "\e[34m" "\e[32m" "\e[36m" "\e[31m" "\e[35m" "\e[33m" "\e[37m" "\e[
 apt-get update && apt-get -y full-upgrade
 pkg i -y screen neovim zip dnsutils termux-services whois tracepath wget git nmap termux-api openssh nodejs;
 
-[ $? == 0 ] && bash -c $'clear && echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED"' || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE"
+[ $? == 0 ] && eval "clear && echo -e \"${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE"
