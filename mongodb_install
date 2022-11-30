@@ -3,5 +3,7 @@
 #if error not installed do "apt --fix-broken install"
 apt-get update
 pkg i -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+apt --fix-broken install
 wget https://repo.mongodb.org/apt/ubuntu/dists/focal/mongodb-org/6.0/multiverse/binary-arm64/mongodb-org-server_6.0.3_arm64.deb
 dpkg -i mongodb-org-server_6.0.3_arm64.deb
+mongod
