@@ -6,4 +6,4 @@ sed -i 's/jammy/focal/g' /etc/apt/sources.list
 echo "Package: *
 Pin: release a=focal
 Pin-Priority: 1001" > /etc/apt/preferences
-apt update && apt dist-upgrade
+apt update && apt --allow-downgrades dist-upgrade
