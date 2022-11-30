@@ -19,4 +19,4 @@ apt-get full-upgrade
 
 rm '='
 
-[ $? == 0 ] && eval "clear && echo -e \"${_0[15]}\$(cat /etc/os-release)\n${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE"
+[ $? == 0 ] && eval "clear && echo -e \"${_0[15]}\$(cat /etc/os-release)\n${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED${_0[0]}\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE${_0[0]}"
