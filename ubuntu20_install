@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+apt update && apt -y dist-upgrade
+apt install -y gnupg nano
+sed -i 's/jammy/focal/g' /etc/apt/sources.list
+echo "Package: *
+Pin: release a=focal
+Pin-Priority: 1001" > /etc/apt/preferences
+apt update && apt -y dist-upgrade
