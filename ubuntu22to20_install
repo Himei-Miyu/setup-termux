@@ -7,4 +7,4 @@ echo "Package: *
 Pin: release a=focal
 Pin-Priority: 1001" > /etc/apt/preferences
 apt update
-apt-get full-upgrade
+echo "please use command \"apt-get full-upgrade\""
