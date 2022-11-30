@@ -8,3 +8,7 @@ curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/termux_ins
 ```bash
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu_lts_install | bash
 ```
+- [Ubuntu22to20_install](https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu22to20_install)
+```bash
+curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu22to20_install -o /tmp/t && . /tmp/t
+```
