@@ -7,5 +7,4 @@ wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 apt-get update
 apt-get install -y mongodb-org
-
-mongod --bind_ip 0.0.0.0 &
+echo "STATUS : $( [ $? == 0 ] && echo FAILED || echo COMPLETED )"
