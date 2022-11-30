@@ -7,4 +7,3 @@ apt-get -f install
 mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent
 rm -rf /var/lib/dpkg/info
 mv /var/lib/dpkg/info_silent /var/lib/dpkg/info
-echo "please use command \"apt-get full-upgrade\""
