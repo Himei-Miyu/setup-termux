@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+mv /var/lib/dpkg/info /var/lib/dpkg/info_silent
+mkdir /var/lib/dpkg/info
+apt-get update
+apt-get -f install
+mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent
+rm -rf /var/lib/dpkg/info
+mv /var/lib/dpkg/info_silent /var/lib/dpkg/info
+apt -y dist-upgrade
