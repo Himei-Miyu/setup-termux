@@ -6,7 +6,7 @@ apt-get update
 pkg i -y proot-distro
 proot-distro install ubuntu
 
-[ $? >= 1 ] && echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE"
+[ $? -gt 0 ] && echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE"
 
 rm '='
 
