@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
 
+apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+wget https://repo.mongodb.org/apt/ubuntu/dists/focal/mongodb-org/6.0/multiverse/binary-amd64/mongodb-org-server_6.0.3_amd64.deb
+dpkg -i mongodb-org-server_6.0.3_amd64.deb
