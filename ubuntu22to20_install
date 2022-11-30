@@ -14,6 +14,7 @@ apt update && apt-get full-upgrade
 
 [ $? -gt 0 ] && curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/dpkg_repair | bash
 
+wait
 apt-get full-upgrade
 
 [ $? == 0 ] && eval "clear && echo -e \"${_0[15]}\$(cat /etc/os-release)\n${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED\n${_0[15]}Tip ${_0[8]}> ${_0[11]}use command ${_0[0]}\\\"${_0[12]}proot-distro login ubuntu${_0[0]}\\\"\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE"
