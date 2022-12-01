@@ -13,6 +13,7 @@ apt-get update
 apt-get install -y mongodb-org
 keyRepair() {
   read -p "publicKey : " PKEY
+  wait
   apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-key $PKEY
   apt-get update
   apt-get install -y mongodb-org
