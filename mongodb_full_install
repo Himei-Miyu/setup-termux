@@ -11,12 +11,13 @@ wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 apt-get update
 apt-get install -y mongodb-org
+
 keyRepair() {
   read -p "publicKey : " PKEY
-  wait
   apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-key $PKEY
   apt-get update
   apt-get install -y mongodb-org
-  [ $? == 0 ] && eval "clear && echo -e \"${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED\n${_0[15]}Tip ${_0[8]}> ${_0[2]}command ${_0[0]}\\\"${_0[15]}mongod${_0[0]}\\\" ${_0[2]}is db service\n command ${_0[0]}\\\"${_0[15]}mongosh${_0[0]}\\\" ${_0[2]}is shell command\n run ${_0[0]}\\\"${_0[15]}mongod -f /etc/mongod.conf${_0[0]}\\\" ${_0[2]}for start service${_0[0]}\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE${_0[0]}"
 }
-[ $? -gt 1 ] && keyRepair
+[ $? -gt 0 ] && keyRepair
+
+[ $? == 0 ] && eval "clear && echo -e \"${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED\n${_0[15]}Tip ${_0[8]}> ${_0[2]}command ${_0[0]}\\\"${_0[15]}mongod${_0[0]}\\\" ${_0[2]}is db service\n command ${_0[0]}\\\"${_0[15]}mongosh${_0[0]}\\\" ${_0[2]}is shell command\n run ${_0[0]}\\\"${_0[15]}mongod -f /etc/mongod.conf${_0[0]}\\\" ${_0[2]}for start service${_0[0]}\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE${_0[0]}"
