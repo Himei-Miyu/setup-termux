@@ -30,7 +30,7 @@ declare -a _R=("^$\|WARNING");
 
 # Errors
 declare -a _E=(
-'sed -i "/${_R[0]}/d" Himei/error.log && echo -e "${_H[0]}${_C[13]}$(cat Himei/error.log)" && exit 1'
+'sed -i "/${_R[0]}/d" Himei/error.log && echo -e "${_H[0]}${_C[13]}$(cat Himei/error.log)${_C[0]}" && exit 1'
 'cat "Himei/error.log" && exit 1'
 'echo -e "${_EM[0]}" && exit 1'
 'echo -e "${_EM[1]}" && exit 1');
