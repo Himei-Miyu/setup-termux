@@ -31,6 +31,6 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termu
 
 # apt update upgrade
 echo -e "${_H[0]}${_M[10]}";
-unset _C _H _M _EM _R _E _LIBS;
+unset _C _H _M _EM _R _E _LIBS _ALLOW_DOWNGRADES;
 
 rm -rf Himei;
