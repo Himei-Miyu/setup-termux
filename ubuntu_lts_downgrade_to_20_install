@@ -28,5 +28,5 @@ sleep 3 && clear;
 echo -e "${_C[12]}${_M[9]}";
 
 # [ CLEAN ]
-unset _C _H _M _EM _R _E _LIBS;
+unset _C _H _M _EM _R _E _LIBS _INFOS;
 rm -rf Himei;
