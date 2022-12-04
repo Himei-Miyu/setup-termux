@@ -4,38 +4,29 @@
 mkdir -p Himei;
 echo -e 'declare _ALLOW_DOWNGRADES="enabled"' >> Himei/environment;
 
-# [ TERMUX UPDATE & UPGRADE ]
+# [ UBUNTU UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-
 [ $? -gt 0 ] && [ "$(cat Himei/error.log | grep -o 'dpkg')" == "dpkg" ] && curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/dpkg_repair | bash
 
 . Himei/variables;
-
 ! [ -e "/etc/os-release" ] && eval ${_E[3]};
 
-# [ UBUNTU DOWNGRADE ]
+# [ UBUNTU INSTALL & SETUP ]
 declare -a _LIBS=(gnupg nano);
-
 echo -e "${_H[0]}${_M[4]}";
-
 pkg i --allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-
 echo -e "${_H[0]}${_M[5]}";
 
 sed -i 's/jammy/focal/g' /etc/apt/sources.list;
-
 echo -e "Package: *\nPin: release a=focal\nPin-Priority: 1001" > /etc/apt/preferences
 
 # [ UBUNTU UPDATE & UPGRADE ]
 echo -e "${_H[0]}${_M[9]}";
-
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-
 [ $? -gt 0 ] && [ "$(cat Himei/error.log | grep -o 'dpkg')" == "dpkg" ] && curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/dpkg_repair | bash
-
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-
 echo -e "${_H[0]}${_M[10]}";
-unset _C _H _M _EM _R _E _LIBS _ALLOW_DOWNGRADES;
 
+# [ CLEAN ]
+unset _C _H _M _EM _R _E _LIBS;
 rm -rf Himei;
