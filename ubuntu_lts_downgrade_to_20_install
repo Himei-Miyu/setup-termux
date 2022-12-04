@@ -23,7 +23,7 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termu
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
 echo -e "${_H[0]}${_M[10]}";
 declare _INFOS="$(cat /etc/os-release | sed -rne 's/^(NAME=)|(VERSION=)/ /p' | sed -r 's/\"//g' | tr -d "\012")";
-_M[9]="Welcome to${_INFOS}${_0[0]}";
+_M[9]="Welcome to${_INFOS}${_C[0]}";
 sleep 3 && clear;
 echo -e "${_C[12]}${_M[9]}";
 
