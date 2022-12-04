@@ -23,8 +23,6 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termu
 
 declare -a _INFOS=($(cat "/etc/os-release" | sed 's/^.*\=\|\"//g' | sed 's/\s/\_/g'));
 
-echo -e "${_H[0]}${_M[3]}";
-
 _M[9]="Welcome to ${_INFOS[1]} ${_INFOS[3]//_/ }";
 _M[10]="${_C[11]}run ${_C[7]}\"${_C[14]}proot-distro login ubuntu --shared-tmp${_C[7]}\"${_C[0]}";
 
