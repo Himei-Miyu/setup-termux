@@ -1,24 +1,34 @@
 # Termux-Installs
 
-- [✓] Termux Utilities ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/termux_utilities_install)) & ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_utilities_install))
+- [✓] Termux Utilities
+ 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/termux_utilities_install))
+ 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_utilities_install))
 ```bash
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_utilities_install | bash
 ```
-- [✓] Ubuntu LTS ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_install)) & ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_install))
+- [✓] Ubuntu LTS
+ 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_install))
+ 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_install))
 ```bash
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_install | bash
 ```
-- [✘] Ubuntu LTS Downgrade to v.20.04 ([Source]()) & ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu22to20_install))
+- [✘] Ubuntu LTS Downgrade to v.20.04
+ 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_downgrade_to_20_install))
+ 📦 ([Raw]())
 ```bash
-curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/ubuntu22to20_install -o /tmp/t && . /tmp/t
+curl -- -o /tmp/t && . /tmp/t
 ```
-- [✘] MongoDB CLI & Server ([Source]()) & ([MongoDB_full_install](https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/mongodb_full_install))
+- [✘] MongoDB CLI & Server
+ 🔍 ([Source]())
+ 📦 ([Raw]())
 ```bash
-curl https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/mongodb_full_install -o /tmp/db && . /tmp/db
+curl -- -o /tmp/db && . /tmp/db
 ```
-- [✘] MongoDB Server ([Source]()) & ([Raw]())
+- [✘] MongoDB Server
+ 🔍 ([Source]())
+ 📦 ([Raw]())
 ```bash
-curl
+curl --
 ```
 
 NO PUBLICKEY
