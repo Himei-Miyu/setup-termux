@@ -9,11 +9,11 @@ curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variable
 
 echo -e "${_H[0]}${_M[0]}";
 
-apt-get update 2> Himei/error.log 1> Himei/install.log || eval ${_ERR[0]};
+apt-get update 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 
 echo -e "${_H[0]}${_M[1]}";
 echo -e "${_H[0]}${_M[2]}";
 
-apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_ERR[0]};
+apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 
 echo -e "${_H[0]}${_M[3]}";
