@@ -5,7 +5,9 @@
 mkdir -p Himei;
 touch Himei/error.log Himei/install.log
 
-curl -s https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables;
+curl -s https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables | bash;
+
+wait $!;
 
 echo -e "${_H[0]}${_M[0]}";
 
