@@ -16,7 +16,9 @@ declare -a _M=(
 "${_C[12]}Install packages additional completed${_C[0]}"
 "${_C[11]}Installing ubuntu${_C[0]}"
 "${_C[12]}Install ubuntu completed${_C[0]}"
-"${_C[11]}Starting install packages ubuntu${_C[0]}");
+"${_C[11]}Starting install packages ubuntu${_C[0]}"
+"${_C[11]}Downgrading ubuntu${_C[0]}"
+"${_C[12]}Downgrade ubuntu completed${_C[0]}");
 
 # Error messages
 declare -a _EM=(
