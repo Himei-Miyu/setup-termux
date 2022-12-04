@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Colors
-declare -xa _C=("\e[0m" "\e[34m" "\e[32m" "\e[36m" "\e[31m" "\e[35m" "\e[33m" "\e[37m" "\e[90m" "\e[94m" "\e[30m" "\e[92m" "\e[94m" "\e[91m" "\e[95m" "\e[93m" "\e[97m" "\e[1;m" "\e[2;m" "\e[3;m" "\e[4;m" "\e[9;m");
+declare -a _C=("\e[0m" "\e[34m" "\e[32m" "\e[36m" "\e[31m" "\e[35m" "\e[33m" "\e[37m" "\e[90m" "\e[94m" "\e[30m" "\e[92m" "\e[94m" "\e[91m" "\e[95m" "\e[93m" "\e[97m" "\e[1;m" "\e[2;m" "\e[3;m" "\e[4;m" "\e[9;m");
 
 # Prefix name
-declare -xa _H=("${C[14]}${C[17]}HIMEI ${C[8]}> ");
+declare -a _H=("${C[14]}${C[17]}HIMEI ${C[8]}> ");
 
 # Messages
-declare -xa _M=(
+declare -a _M=(
 "${_C[11]}Updating packages${_C[0]}"
 "${_C[12]}Update packages completed${_C[0]}"
 "${_C[11]}Installing packages${_C[0]}"
@@ -18,7 +18,7 @@ declare -xa _M=(
 "${_C[12]}Install ubuntu completed${_C[0]}");
 
 # Regular Expression
-declare -xa _R=("^$\|WARNING");
+declare -a _R=("^$\|WARNING");
 
 # Errors
-declare -xa E=("sed -i '/${_REGEXS[0]}/d' .error.log && echo -e \"${_PREMSG}${_0[13]}$(cat .error.log)\" && exit 1" "cat .error.log && exit 1" "echo -e \"${_PREMSG}${_0[4]}Ubuntu has installed?\" && exit 1");
+declare -a E=("sed -i '/${_REGEXS[0]}/d' .error.log && echo -e \"${_PREMSG}${_0[13]}$(cat .error.log)\" && exit 1" "cat .error.log && exit 1" "echo -e \"${_PREMSG}${_0[4]}Ubuntu has installed?\" && exit 1");
