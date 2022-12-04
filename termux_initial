@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# [ TERMUX UPDATE & UPGRADE ]
+
+touch .error.log;
+
+curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables | bash;
+
+echo -e "${_H[0]}${_M[0]}";
+
+apt-get update 2> .error.log 1> /dev/null || eval ${_ERR[0]};
+
+echo -e "${_H[0]}${_M[1]}";
+echo -e "${_H[0]}${_M[2]}";
+
+apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> .error.log 1> /dev/null || eval $_ERR;
+
+echo -e "${_H[0]}${_M[3]}";
