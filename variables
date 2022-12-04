@@ -19,7 +19,9 @@ declare -a _M=(
 "${_C[11]}Starting install packages ubuntu${_C[0]}");
 
 # Error messages
-declare -a _EM=("${_H[0]}${_C[4]}Ubuntu is not installed");
+declare -a _EM=(
+"${_H[0]}${_C[4]}Ubuntu is not installed${_C[0]}"
+"${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}");
 
 # Regular Expression
 declare -a _R=("^$\|WARNING");
@@ -28,4 +30,5 @@ declare -a _R=("^$\|WARNING");
 declare -a _E=(
 'sed -i "/${_R[0]}/d" Himei/error.log && echo -e "${_H[0]}${_C[13]}$(cat Himei/error.log)" && exit 1'
 'cat "Himei/error.log" && exit 1'
-'echo -e "${_EM[0]}" && exit 1');
+'echo -e "${_EM[0]}" && exit 1'
+'echo -e "${_EM[1]}" && exit 1');
