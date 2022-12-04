@@ -19,3 +19,5 @@ echo -e "${_H[0]}${_M[2]}";
 apt-get -o Dpkg::Options::="--force-confdef" $_ALLOW_DOWNGRADES -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 
 echo -e "${_H[0]}${_M[3]}";
+
+unset _ALLOW_DOWNGRADES;
