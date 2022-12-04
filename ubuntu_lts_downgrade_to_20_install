@@ -21,7 +21,9 @@ sed -i 's/jammy/focal/g' /etc/apt/sources.list;
 echo -e "Package: *\nPin: release a=focal\nPin-Priority: 1001" > /etc/apt/preferences
 
 # [ UBUNTU UPDATE & UPGRADE ]
-echo -e "${_H[0]}{_M[9]}";
+echo -e "${_H[0]}${_M[9]}";
+
+declare _ALLOW_DOWNGRADES="--allow-downgrades"; 
 
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
 
