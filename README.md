@@ -14,9 +14,9 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubunt
 ```
 [✘] **Ubuntu LTS Downgrade to v.20.04**
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_downgrade_to_20_install))
- - 📦 ([Raw]())
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_downgrade_to_20_install))
 ```bash
-curl -- -o /tmp/t && . /tmp/t
+curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_downgrade_to_20_install | bash
 ```
 [✘] **MongoDB CLI & Server**
  - 🔍 ([Source]())
