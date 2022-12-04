@@ -1,20 +1,17 @@
 #!/bin/bash
 
-touch .error.log;
+# [ TERMUX UPDATE & UPGRADE ]
+curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
 
-declare -a _0=( "\e[0m" "\e[34m" "\e[32m" "\e[36m" "\e[31m" "\e[35m" "\e[33m" "\e[37m" "\e[90m" "\e[94m" "\e[30m" "\e[92m" "\e[94m" "\e[91m" "\e[95m" "\e[93m" "\e[97m" "\e[1;m" "\e[2;m" "\e[3;m" "\e[4;m" "\e[9;m" );
+# [ TERMUX UTILITIES ]
 declare -a _LIBS=(dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip);
-declare -a _REGEXS=("^$\|WARNING");
-declare _PREMSG="${_0[14]}${_0[17]}HIMEI ${_0[8]}> ";
-declare -a _MSGS=("Error found" "Updating packages" "Packages has been updated" "Installing packages" "Packages has been installed" "Installing packages additional");
-declare _ERR="sed -i '/${_REGEXS[0]}/d' .error.log && echo -e \"${_PREMSG}${_0[13]}$(cat .error.log)\" && exit 1";
 
-echo -e "$_PREMSG${_0[11]}${_MSGS[1]}";
-apt-get update 2> .error.log 1> /dev/null || eval $_ERR;
-echo -e "$_PREMSG${_0[11]}${_MSGS[2]}\n$_PREMSG${_0[11]}${_MSGS[3]}";
-apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> .error.log 1> /dev/null || eval $_ERR;
-echo -e "$_PREMSG${_0[11]}${_MSGS[4]}\n$_PREMSG${_0[11]}${_MSGS[5]}";
-pkg i -y ${_LIBS[@]} 2> .error.log 1> /dev/null || eval $_ERR;
-echo -e "$_PREMSG${_0[11]}${_MSGS[4]}";
-unset _0 _LIBS _REGEXS _MSGS _ERR;
-rm -rf .error.log;
+echo -e "${_H[0]}${_M[4]}";
+
+pkg i -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+
+echo -e "${_H[0]}${_M[5]}";
+
+unset _C _H _M _EM _R _E _LIBS;
+
+rm -rf Himei;
