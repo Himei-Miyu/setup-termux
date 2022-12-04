@@ -7,6 +7,7 @@ touch Himei/error.log Himei/install.log
 
 ! [ -e "Himei/variables" ] && curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables
 [ -e "Himei/variables" ] && . Himei/variables;
+[ -e "Himei/environment" ] && . Himei/environment;
 
 echo -e "${_H[0]}${_M[0]}";
 
