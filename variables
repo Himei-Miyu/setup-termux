@@ -8,15 +8,14 @@ declare -a _H=("${C[14]}${C[17]}HIMEI ${C[8]}> ");
 
 # Messages
 declare -a _M=(
-"-"
-"Updating packages"
-"Update packages completed"
-"Installing packages"
-"Install packages completed"
-"Installing packages additional"
-"Install packages additional completed"
-"Installing ubuntu"
-"Install ubuntu completed");
+"${_C[11]}Updating packages${_C[0]}"
+"${_C[12]}Update packages completed${_C[0]}"
+"${_C[11]}Installing packages${_C[0]}"
+"${_C[12]}Install packages completed${_C[0]}"
+"${_C[11]}Installing packages additional${_C[0]}"
+"${_C[12]}Install packages additional completed${_C[0]}"
+"${_C[11]}Installing ubuntu${_C[0]}"
+"${_C[12]}Install ubuntu completed${_C[0]}");
 
 # Regular Expression
 declare -a _R=("^$\|WARNING");
