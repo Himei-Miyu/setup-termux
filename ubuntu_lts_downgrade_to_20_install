@@ -16,7 +16,7 @@ declare -a _LIBS=(gnupg nano);
 
 echo -e "${_H[0]}${_M[4]}";
 
-pkg i -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+pkg i --allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 
 echo -e "${_H[0]}${_M[5]}";
 
