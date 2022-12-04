@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # [ ENVIRONMENT ]
-declare _ALLOW_DOWNGRADES="--force-downgrades";
+declare _ALLOW_DOWNGRADES="enabled";
 
 # [ TERMUX UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
