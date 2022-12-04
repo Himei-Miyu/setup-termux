@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# [ ENVIRONMENT ]
+declare _ALLOW_DOWNGRADES="--allow-downgrades";
+
 # [ TERMUX UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
 
@@ -22,8 +25,6 @@ echo -e "Package: *\nPin: release a=focal\nPin-Priority: 1001" > /etc/apt/prefer
 
 # [ UBUNTU UPDATE & UPGRADE ]
 echo -e "${_H[0]}${_M[9]}";
-
-declare _ALLOW_DOWNGRADES="--allow-downgrades"; 
 
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
 
