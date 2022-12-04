@@ -15,7 +15,7 @@ apt-get update 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 echo -e "${_H[0]}${_M[1]}";
 echo -e "${_H[0]}${_M[2]}";
 
-[ $_ALLOW_DOWNGRADES == "enabled" ] && apt-get -o Dpkg::Options::="--force-downgrade" -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+[ $_ALLOW_DOWNGRADES == "enabled" ] && _ALLOW_DOWNGRADES="--allow-downgrades"; 
+apt-get -o Dpkg::Options::="--force-confdef" $_ALLOW_DOWNGRADES -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 
 echo -e "${_H[0]}${_M[3]}";
