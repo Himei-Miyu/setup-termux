@@ -12,7 +12,7 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termu
 ```bash
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_install | bash
 ```
-[✘] **Ubuntu LTS Downgrade to v.20.04**
+[✓] **Ubuntu LTS Downgrade to v.20.04**
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_downgrade_to_20_install))
  - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_downgrade_to_20_install))
 ```bash
