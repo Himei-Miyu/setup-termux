@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # [ ENVIRONMENT ]
-declare _ALLOW_DOWNGRADES="enabled";
+mkdir -p Himei;
+echo -e 'declare _ALLOW_DOWNGRADES="enabled"' >> Himei/environment;
 
 # [ TERMUX UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
