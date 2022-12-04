@@ -1,19 +1,15 @@
 #!/bin/bash
 
-# [ TERMUX UPDATE & UPGRADE ]
+# [ UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-
 . Himei/variables;
 
-# [ TERMUX UTILITIES ]
+# [ INSTALL UTILITIES ]
 declare -a _LIBS=(dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip);
-
 echo -e "${_H[0]}${_M[4]}";
-
-pkg i -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-
+pkg i --allow-downgrade -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 echo -e "${_H[0]}${_M[5]}";
 
+# [ CLEAN ]
 unset _C _H _M _EM _R _E _LIBS;
-
 rm -rf Himei;
