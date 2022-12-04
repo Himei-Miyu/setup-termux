@@ -2,17 +2,18 @@
 
 # [ TERMUX UPDATE & UPGRADE ]
 
-touch .error.log;
+mkdir -p Himei;
+touch Himei/error.log && Himei/install.log
 
 curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables;
 
 echo -e "${_H[0]}${_M[0]}";
 
-apt-get update 2> .error.log 1> /dev/null || eval ${_ERR[0]};
+apt-get update 2> Himei/error.log 1> Himei/install.log || eval ${_ERR[0]};
 
 echo -e "${_H[0]}${_M[1]}";
 echo -e "${_H[0]}${_M[2]}";
 
-apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> .error.log 1> /dev/null || eval $_ERR;
+apt-get -o Dpkg::Options::="--force-confdef" -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval $_ERR;
 
 echo -e "${_H[0]}${_M[3]}";
