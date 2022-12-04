@@ -2,7 +2,7 @@
 
 # [ TERMUX UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-
+echo -e"THIS AT UTILITY"
 # [ TERMUX UTILITIES ]
 declare -a _LIBS=(dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip);
 
