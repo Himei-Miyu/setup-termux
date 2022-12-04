@@ -17,8 +17,14 @@ declare -a _M=(
 "${_C[11]}Installing ubuntu${_C[0]}"
 "${_C[12]}Install ubuntu completed${_C[0]}");
 
+# Error messages
+declare -a _EM=("${_H[0]}${_C[4]}Ubuntu is not installed");
+
 # Regular Expression
 declare -a _R=("^$\|WARNING");
 
 # Errors
-declare -a _E=("sed -i '/${_R[0]}/d' Himei/error.log && echo -e \"${_H[0]}${_C[13]}$(cat Himei/error.log)\" && exit 1" "cat Himei/error.log && exit 1" "echo -e \"${_H}${_C[4]}Ubuntu has installed?\" && exit 1");
+declare -a _E=(
+'sed -i "/${_R[0]}/d" Himei/error.log && echo -e "${_H[0]}${_C[13]}$(cat Himei/error.log)" && exit 1'
+'cat "Himei/error.log" && exit 1'
+'echo -e "${_EM[0]}" && exit 1');
