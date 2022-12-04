@@ -15,7 +15,8 @@ declare -a _M=(
 "${_C[11]}Installing packages additional${_C[0]}"
 "${_C[12]}Install packages additional completed${_C[0]}"
 "${_C[11]}Installing ubuntu${_C[0]}"
-"${_C[12]}Install ubuntu completed${_C[0]}");
+"${_C[12]}Install ubuntu completed${_C[0]}"
+"${_C[11]}Starting install packages ubuntu${_C[0]}");
 
 # Error messages
 declare -a _EM=("${_H[0]}${_C[4]}Ubuntu is not installed");
