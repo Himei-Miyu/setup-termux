@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # [ INSTALL & SETUP ]
-mkdir -p Himei;
-touch Himei/error.log Himei/install.log
-! [ -e "Himei/variables" ] && curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables
-[ -e "Himei/variables" ] && . Himei/variables;
+rm -rf Himei && mkdir -p Himei;
+touch Himei/error.log Himei/install.log;
+curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables;
 
 # [ UPDATE & UPGRADE ]
 echo -e "${_H[0]}${_M[0]}";
