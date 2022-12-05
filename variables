@@ -20,7 +20,9 @@ declare -a _M=(
 "${_C[11]}Downgrading ubuntu${_C[0]}"
 "${_C[12]}Downgrade ubuntu completed${_C[0]}"
 "${_C[15]}Starting repair dpkg package${_C[0]}"
-"${_C[15]}Repair dpkg package completed${_C[0]}");
+"${_C[15]}Repair dpkg package completed${_C[0]}"
+"${_C[11]}Installing MongoDB CLI & Server${_C[0]}"
+"${_C[12]}Install MongoDB completed${_C[0]}");
 
 # Error messages
 declare -a _EM=(
