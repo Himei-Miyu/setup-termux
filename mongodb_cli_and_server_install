@@ -1,7 +1,9 @@
 #!/bin/bash
  
 # [ UPDATE & UPGRADE ]
+echo HERE0000S
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+echo HERE0
 . Himei/variables;
 ! [[ -e /etc/os-release ]] && eval ${_E[3]};
 [[ $? -gt 0 ]] && eval ${_E[0]};
