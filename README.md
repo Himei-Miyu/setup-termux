@@ -19,7 +19,7 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubunt
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_downgrade_to_20_install | bash
 ```
 [✘] **MongoDB CLI & Server**
- - 🔍 ([Source]())
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/mongodb_cli_and_server_install))
  - 📦 ([Raw]())
 ```bash
 curl -- -o /tmp/db && . /tmp/db
