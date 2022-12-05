@@ -25,7 +25,7 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubunt
 curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mongodb_cli_and_server_install -o /tmp/db && . /tmp/db
 ```
 [✘] **MongoDB Server**
- - 🔍 ([Source]())
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/mongodb_server_install))
  - 📦 ([Raw]())
 ```bash
 curl --
