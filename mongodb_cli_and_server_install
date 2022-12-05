@@ -1,16 +1,39 @@
-#!/usr/bin/bash
+#!/bin/bash
+ 
+# [ UPDATE & UPGRADE ]
+curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+. Himei/variables;
+! [[ -e /etc/os-release ]] && eval ${_E[3]};
+[[ $? -gt 0 ]] && [[ $(cat Himei/error.log | grep -o 'dpkg') == dpkg ]] && curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/dpkg_repair | bash;
+[[ $? -gt 0 ]] && eval ${_E[0]};
 
-_0=( "\e[0m" "\e[34m" "\e[32m" "\e[36m" "\e[31m" "\e[35m" "\e[33m" "\e[37m" "\e[90m" "\e[94m" "\e[30m" "\e[92m" "\e[94m" "\e[91m" "\e[95m" "\e[93m" "\e[97m" "\e[1;m" "\e[2;m" "\e[3;m" "\e[4;m" "\e[9;m" )
+# [ INSTALL MONGODB CLI & SERVER ]
+declare -a _LIBS=(wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release);
+declare _PKG="--allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log";
+declare _isV22="$(cat /etc/os-release | sed -rne '/^(VERSION_ID=)/p' | sed -re 's/(VERSION_ID=)|"//g')";
+declare _SSL="http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb";
+declare _GPG="https://www.mongodb.org/static/pgp/server-6.0.asc";
+declare _SRCDB="deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse";
+declare -a _PATHS=("Himei/ssl.deb" "/etc/apt/trusted.gpg.d/mongodb-6.gpg" "/etc/apt/sources.list.d/mongodb-org-6.0.list");
 
-! [ -s "/etc/os-release" ] && eval "echo -e \"${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}must install in ubuntuOS${_0[0]}\" && exit 1"
+echo -e "${_H[0]}${_M[4]}";
+pkg i $_PKG || eval ${_E[0]};
+echo -e "${_H[0]}${_M[5]}";
+[[ $_isV22 =~ ^22 ]] && wget -O ${_PATHS[0]} $_SSL && dpkg -i ${_PATHS[0]};
+curl -fsSL $_GPG | gpg --dearmor -o ${_PATHS[1]};
+echo "$_SRCDB" > ${_PATHS[2]};
+_LIBS=(mongodb-org);
+echo -e "${_H[0]}${_M[13]}";
+pkg i $_PKG || eval ${_E[0]};
+echo -e "${_H[0]}${_M[14]}";
+sleep 5 && clear;
+_M[10]="${_C[11]}run ${_C[7]}\"${_C[14]}mongod${_C[7]}\" ${_C[11]}for start database server${_C[0]}";
+_M[11]="${_C[11]}run ${_C[7]}\"${_C[14]}mongosh${_C[7]}\" ${_C[11]}for connect database server${_C[0]}";
+echo -e "${_M[10]}\n${_M[11]}";
 
-apt-get update
-pkg i -y wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common
-apt --fix-broken install
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-apt-get update
-[ $? -gt 0 ] && apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-key $(echo $(apt update 2>&1) | grep -o "NO_PUBKEY\s[A-Z0-9]\{16\}" | cut -d " " -f 2) && apt-get update
-apt-get install -y mongodb-org
+# fix NO_PUBKEY
+# [ $? -gt 0 ] && apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-key $(echo $(apt update 2>&1) | grep -o "NO_PUBKEY\s[A-Z0-9]\{16\}" | cut -d " " -f 2) && apt-get update
 
-[ $? == 0 ] && eval "clear && echo -e \"${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[2]}INSTALL COMPLETED\n${_0[15]}Tip ${_0[8]}> ${_0[2]}command ${_0[0]}\\\"${_0[15]}mongod${_0[0]}\\\" ${_0[2]}is db service\n command ${_0[0]}\\\"${_0[15]}mongosh${_0[0]}\\\" ${_0[2]}is shell command\n run ${_0[0]}\\\"${_0[15]}mongod -f /etc/mongod.conf${_0[0]}\\\" ${_0[2]}for start service${_0[0]}\"" || echo -e "${_0[14]}${_0[17]}HIMEI ${_0[8]}> ${_0[4]}INSTALL NOT COMPLETE${_0[0]}"
+# [ CLEAN ]
+unset _C _H _M _EM _R _E _LIBS _PKG _isV22 _SSL _GPG _SRCDB _PATHS;
+rm -rf Himei;
