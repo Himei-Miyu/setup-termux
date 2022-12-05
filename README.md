@@ -26,7 +26,7 @@ curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mongodb_
 ```
 [✘] **MongoDB Server**
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/mongodb_server_install))
- - 📦 ([Raw]())
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mongodb_server_install))
 ```bash
 curl --
 ```
