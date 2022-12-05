@@ -4,12 +4,11 @@
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
 . Himei/variables;
 ! [[ -e /etc/os-release ]] && eval ${_E[3]};
-[[ $? -gt 0 ]] && [[ $(cat Himei/error.log | grep -o 'dpkg') == dpkg ]] && curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/dpkg_repair | bash;
 [[ $? -gt 0 ]] && eval ${_E[0]};
 
 # [ INSTALL MONGODB CLI & SERVER ]
 declare -a _LIBS=(wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release);
-declare _PKG="--allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log";
+declare _PKG="--allow-downgrades -y ${_LIBS[@]}";
 declare _isV22="$(cat /etc/os-release | sed -rne '/^(VERSION_ID=)/p' | sed -re 's/(VERSION_ID=)|"//g')";
 declare _SSL="http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb";
 declare _GPG="https://www.mongodb.org/static/pgp/server-6.0.asc";
@@ -17,14 +16,14 @@ declare _SRCDB="deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu foc
 declare -a _PATHS=("Himei/ssl.deb" "/etc/apt/trusted.gpg.d/mongodb-6.gpg" "/etc/apt/sources.list.d/mongodb-org-6.0.list");
 
 echo -e "${_H[0]}${_M[4]}";
-pkg i $_PKG || eval ${_E[0]};
+pkg i $_PKG 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 echo -e "${_H[0]}${_M[5]}";
 [[ $_isV22 =~ ^22 ]] && wget -O ${_PATHS[0]} $_SSL && dpkg -i ${_PATHS[0]};
 curl -fsSL $_GPG | gpg --dearmor -o ${_PATHS[1]};
 echo "$_SRCDB" > ${_PATHS[2]};
 _LIBS=(mongodb-org);
 echo -e "${_H[0]}${_M[13]}";
-pkg i $_PKG || eval ${_E[0]};
+pkg i $_PKG 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 echo -e "${_H[0]}${_M[14]}";
 sleep 5 && clear;
 _M[10]="${_C[11]}run ${_C[7]}\"${_C[14]}mongod${_C[7]}\" ${_C[11]}for start database server${_C[0]}";
