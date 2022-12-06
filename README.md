@@ -1,6 +1,6 @@
 # Termux Installs ✓
 
-[✘] **Termux Utilities**
+[✓] **Termux Utilities**
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/termux_utilities_install))
  - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_utilities_install))
 ```bash
