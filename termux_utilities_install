@@ -2,7 +2,7 @@
 
 # [ UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-[[ $? -gt 0 ]] && 
+[[ $? -gt 0 ]] && eval ${_E[0]};
 . Himei/variables;
 
 # [ INSTALL UTILITIES ]
