@@ -66,6 +66,7 @@ _CM[1]="sed -ri "/${_R[0]}/d" Himei/error.log";
 _CM[2]="cat "Himei/error.log"";
 
 _ERRORS() {
+  echo THIS ERR FN
   local option=$1, text=$@, prefix=${_H[0]}${_C[4]};
   text=${text[@]:1};
   [[ $option == --no-warn ]] && eval "${_CM[1]} && echo -e "${prefix}$(${_CM[2]})" && ${_CM[0]}";
