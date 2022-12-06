@@ -6,7 +6,7 @@ declare -a _M=(); # [ MESSAGES ]
 declare -a _EM=(); # [ ERROR MESSAGES ]
 declare -a _R=(); # [ REGULAR EXPRESSION ]
 declare -a _E=(); # [ ERROR ]
-decalre -a _LIBS=(); # [ PKGS ]
+declare -a _LIBS=(); # [ PKGS ]
 
 _C[0]="\e[0m"; # [ RESET ]
 _C[1]="\e[34m"; # [ DARK BLUE ]
