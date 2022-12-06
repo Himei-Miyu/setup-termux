@@ -6,9 +6,9 @@ touch Himei/error.log Himei/install.log;
 curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables;
 
 # [ UPDATE & UPGRADE ]
-echo -e "${_H[0]}${_M[0]}";
+echo -e "${_M[1]}";
 apt-get update 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-echo -e "${_H[0]}${_M[1]}";
-echo -e "${_H[0]}${_M[2]}";
-apt-get -o Dpkg::Options::="--force-confdef" --allow-downgrades -y dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-echo -e "${_H[0]}${_M[3]}";
+echo -e "${_M[2]}" && sleep 2;
+echo -e "${_M[3]}";
+apt-get -o ${_O[0]} dist-upgrade 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+echo -e "${_M[4]}" && sleep 2;
