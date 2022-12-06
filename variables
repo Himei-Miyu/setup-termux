@@ -54,7 +54,7 @@ _M[14]="${_H[0]}${_C[11]}Installing MongoDB CLI & Server${_C[0]}";
 _M[15]="${_H[0]}${_C[12]}Install MongoDB completed${_C[0]}";
 
 _EM[0]="${_H[0]}${_C[4]}Ubuntu is not installed${_C[0]}";
-_EM[1]="${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}");
+_EM[1]="${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}";
 
 _R[0]="^$|WARNING";
 _R[1]="delaying package";
