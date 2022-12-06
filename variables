@@ -68,9 +68,9 @@ _CM[2]="cat "Himei/error.log"";
 _ERRORS() {
   local option=$1, text=$@, prefix=${_H[0]}${_C[4]};
   text=${text[@]:1};
-  [[ $option -eq --no-warn ]] && eval "${_CM[1]} && echo -e "${prefix}$(${_CM[2]})" && ${_CM[0]}";
-  [[ $option -eq --normal ]] && eval "${_CM[2]} && ${_CM[0]}";
-  [[ $option -eq --text ]] && eval "echo -e "$text" && ${_CM[0]}";
+  [[ "$option" -eq "--no-warn" ]] && eval "${_CM[1]} && echo -e "${prefix}$(${_CM[2]})" && ${_CM[0]}";
+  [[ "$option" -eq "--normal" ]] && eval "${_CM[2]} && ${_CM[0]}";
+  [[ "$option" -eq "--text" ]] && eval "echo -e "$text" && ${_CM[0]}";
 }
 
 _E[0]="_ERRORS --no-warn";
