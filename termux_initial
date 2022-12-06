@@ -5,6 +5,8 @@ rm -rf Himei && mkdir -p Himei;
 touch Himei/error.log Himei/install.log;
 curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o Himei/variables && . Himei/variables;
 
+[[ $DEBUG -eq enabled ]] && cat Himei/DEBUG 2> Himei/error.log || eval ${_E[0]};
+
 # [ UPDATE & UPGRADE ]
 echo -e "${_M[1]}";
 apt-get update 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
