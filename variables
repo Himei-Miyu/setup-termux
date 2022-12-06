@@ -6,6 +6,7 @@ declare -a _M=(); # [ MESSAGES ]
 declare -a _EM=(); # [ ERROR MESSAGES ]
 declare -a _R=(); # [ REGULAR EXPRESSION ]
 declare -a _E=(); # [ ERROR ]
+decalre -a _LIBS=(); # [ PKGS ]
 
 _C[0]="\e[0m"; # [ RESET ]
 _C[1]="\e[34m"; # [ DARK BLUE ]
@@ -54,6 +55,7 @@ _EM[0]="${_H[0]}${_C[4]}Ubuntu is not installed${_C[0]}";
 _EM[1]="${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}");
 
 _R[0]="^$|WARNING";
+_R[1]="delaying package";
 
 _E[0]="sed -ri "/${_R[0]}/d" Himei/error.log";
 _E[1]="echo -e "${_H[0]}${_C[4]}" && cat "Himei/error.log" && exit 1";
