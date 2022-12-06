@@ -2,12 +2,13 @@
 
 # [ UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+[[ $? -gt 0 ]] && 
 . Himei/variables;
 
 # [ INSTALL UTILITIES ]
 _LIBS=(dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip);
 echo -e "${_M[5]}";
-pkg i ${_O[0]} ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+pkg i ${_O[1]} ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 echo -e "${_M[6]}";
 
 # [ CLEAN ]
