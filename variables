@@ -78,4 +78,4 @@ _E[1]="_ERRORS --normal";
 _E[2]="_ERRORS --text ${_EM[0]}";
 _E[3]="_ERRORS --text ${_EM[1]}";
 
-[[ $DEBUG -eq enabled ]] && cat Himei/DEBUG 2> Himei/error.log || ${_E[0]};
+[[ $DEBUG -eq enabled ]] && cat Himei/DEBUG 2> Himei/error.log || eval ${_E[0]};
