@@ -68,10 +68,10 @@ _CM[2]="cat \"Himei/error.log\"";
 
 _ERRORS() {
   local option=$1 text=($@) nowarn="${_H[0]}${_C[4]}\$(${_CM[2]})";
-  text=${text[@]:1};
+  text="${text[@]:1}";
   [[ $option == --no-warn ]] && eval "${_CM[1]} && echo -e \"$nowarn\" && ${_CM[0]}";
   [[ $option == --normal ]] && eval "${_CM[2]} && ${_CM[0]}";
-  [[ $option == --text ]] && eval "echo -e \"${text[@]}\" && ${_CM[0]}";
+  [[ $option == --text ]] && eval "echo -e \"$text\" && ${_CM[0]}";
 }
 
 _E[0]="_ERRORS --no-warn";
