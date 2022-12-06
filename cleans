@@ -1,2 +1,5 @@
+#!/bin/bash
+
+# [ CLEAN ]
 unset _C;
 rm -rf Himei;
