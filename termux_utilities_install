@@ -5,11 +5,10 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termu
 . Himei/variables;
 
 # [ INSTALL UTILITIES ]
-declare -a _LIBS=(dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip);
-echo -e "${_H[0]}${_M[4]}";
-pkg i --allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-echo -e "${_H[0]}${_M[5]}";
+_LIBS=(dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip);
+echo -e "${_M[5]}";
+pkg i ${_O[0]} ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+echo -e "${_M[6]}";
 
 # [ CLEAN ]
-unset _C _H _M _EM _R _E _LIBS;
 rm -rf Himei;
