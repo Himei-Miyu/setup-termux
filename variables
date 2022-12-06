@@ -8,6 +8,7 @@ declare -a _R=(); # [ REGULAR EXPRESSION ]
 declare -a _E=(); # [ ERROR ]
 declare -a _LIBS=(); # [ PKGS ]
 declare -a _O=(); # [ OPTIONS ]
+declare -a _CM=(); # [ SUB COMMANDS ]
 
 _C[0]="\e[0m"; # [ RESET ]
 _C[1]="\e[34m"; # [ DARK BLUE ]
@@ -58,9 +59,21 @@ _EM[1]="${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}");
 _R[0]="^$|WARNING";
 _R[1]="delaying package";
 
-_E[0]="sed -ri "/${_R[0]}/d" Himei/error.log";
-_E[1]="echo -e "${_H[0]}${_C[4]}" && cat "Himei/error.log" && exit 1";
-_E[2]="echo -e "${_EM[0]}" && exit 1";
-_E[3]="echo -e "${_EM[1]}" && exit 1";
-
 _O[0]="Dpkg::Options::="--force-confdef" --allow-downgrades -y";
+
+_CM[0]="echo -e "${_C[4]}" && exit 1";
+_CM[1]="sed -ri "/${_R[0]}/d" Himei/error.log";
+_CM[2]="cat "Himei/error.log"";
+
+_ERRORS() {
+  local option=$1, text=$@, prefix=${_H[0]}${_C[4]};
+  text=${text[@]:1};
+  [[ $option -eq --no-warn ]] && eval "${_CM[1]} && echo -e "${prefix}$(${_CM[2]})" && ${_CM[0]}";
+  [[ $option -eq --normal ]] && eval "${_CM[2]} && ${_CM[0]}";
+  [[ $option -eq --text ]] && eval "echo -e "$text" && ${_CM[0]}";
+}
+
+_E[0]="_ERRORS --no-warn";
+_E[1]="_ERRORS --normal";
+_E[2]="_ERRORS --text ${_EM[0]}";
+_E[3]="_ERRORS --text ${_EM[1]}";
