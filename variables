@@ -60,18 +60,18 @@ _R[0]="^$";
 _R[1]="WARNING: apt does not";
 _R[2]="debconf: delaying package";
 
-_O[0]="Dpkg::Options::='--force-confdef' --allow-downgrades -y";
+_O[0]="Dpkg::Options::=\"--force-confdef\" --allow-downgrades -y";
 
-_CM[0]="echo -e '${_C[4]}' && exit 1";
-_CM[1]="sed -ri '/${_R[0]}|${_R[1]}/d' Himei/error.log";
-_CM[2]="cat 'Himei/error.log'";
+_CM[0]="echo -e \"${_C[4]}\" && exit 1";
+_CM[1]="sed -ri \"/${_R[0]}|${_R[1]}/d\" \"Himei/error.log\"";
+_CM[2]="cat \"Himei/error.log\"";
 
 _ERRORS() {
-  local option=$1 text=($@) prefix=${_H[0]}${_C[4]};
+  local option=$1 text=($@) nowarn="${_H[0]}${_C[4]}\$(${_CM[2]})";
   text=${text[@]:1};
-  [[ $option == --no-warn ]] && eval "${_CM[1]} && echo -e '${prefix}$(${_CM[2]})' && ${_CM[0]}";
+  [[ $option == --no-warn ]] && eval "${_CM[1]} && echo -e \"$nowarn\" && ${_CM[0]}";
   [[ $option == --normal ]] && eval "${_CM[2]} && ${_CM[0]}";
-  [[ $option == --text ]] && eval "echo -e '${text[@]}' && ${_CM[0]}";
+  [[ $option == --text ]] && eval "echo -e \"${text[@]}\" && ${_CM[0]}";
 }
 
 _E[0]="_ERRORS --no-warn";
