@@ -66,12 +66,12 @@ _CM[1]="sed -ri "/${_R[0]}/d" Himei/error.log";
 _CM[2]="cat "Himei/error.log"";
 
 _ERRORS() {
-  local option=$1, text=$@, prefix=${_H[0]}${_C[4]};
+  local option=$1, text=($@), prefix=${_H[0]}${_C[4]};
   text=${text[@]:1};
   echo "$option :::: ${text}"
   [[ $option == --no-warn ]] && eval "${_CM[1]} && echo -e "${prefix}$(${_CM[2]})" && ${_CM[0]}";
   [[ $option == --normal ]] && eval "${_CM[2]} && ${_CM[0]}";
-  [[ $option == --text ]] && eval "echo -e "$text" && ${_CM[0]}";
+  [[ $option == --text ]] && eval "echo -e "${text[@]}" && ${_CM[0]}";
   echo nothing && exit 1
 }
 
