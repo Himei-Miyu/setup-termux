@@ -7,6 +7,7 @@ declare -a _EM=(); # [ ERROR MESSAGES ]
 declare -a _R=(); # [ REGULAR EXPRESSION ]
 declare -a _E=(); # [ ERROR ]
 declare -a _LIBS=(); # [ PKGS ]
+declare -a _O=(); # [ OPTIONS ]
 
 _C[0]="\e[0m"; # [ RESET ]
 _C[1]="\e[34m"; # [ DARK BLUE ]
@@ -61,3 +62,5 @@ _E[0]="sed -ri "/${_R[0]}/d" Himei/error.log";
 _E[1]="echo -e "${_H[0]}${_C[4]}" && cat "Himei/error.log" && exit 1";
 _E[2]="echo -e "${_EM[0]}" && exit 1";
 _E[3]="echo -e "${_EM[1]}" && exit 1";
+
+_O[0]="Dpkg::Options::="--force-confdef" --allow-downgrades -y";
