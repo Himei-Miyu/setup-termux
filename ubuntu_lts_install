@@ -22,7 +22,7 @@ curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termu
 . Himei/variables;
 
 sleep 3 && clear;
-echo -e "${_M[10]}";
+eval "echo -e "${_M[10]}"";
 echo -e "${_M[11]}";
 
 # [ CLEAN ]
