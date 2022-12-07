@@ -46,7 +46,7 @@ _M[6]="${_H[0]}${_C[12]}Install packages additional completed${_C[0]}";
 _M[7]="${_H[0]}${_C[11]}Installing ubuntu${_C[0]}";
 _M[8]="${_H[0]}${_C[12]}Install ubuntu completed${_C[0]}";
 _M[9]="${_H[0]}${_C[11]}Starting install packages ubuntu${_C[0]}";
-_M[10]="Welcome to\$(${_CM[3]} | ${_R[3]})";
+_M[10]="${_C[12]}Welcome to\$(${_CM[3]})";
 _M[11]="${_C[11]}run ${_C[7]}\"${_C[14]}proot-distro login ubuntu --shared-tmp${_C[7]}\"${_C[0]}";
 _M[12]="${_H[0]}${_C[11]}Downgrading ubuntu${_C[0]}";
 _M[13]="${_H[0]}${_C[12]}Downgrade ubuntu completed${_C[0]}";
@@ -61,7 +61,6 @@ _EM[1]="${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}";
 _R[0]="^$";
 _R[1]="WARNING: apt does not";
 _R[2]="debconf: delaying package";
-_R[3]="sed -n 's/^\(NAME=\)\|\(VERSION=\)/ /p' | sed 's/\"//g' | tr -d "\012"";
 
 _O[0]="Dpkg::Options::=--force-confdef --allow-downgrades -y";
 _O[1]="--allow-downgrades -y";
@@ -69,7 +68,7 @@ _O[1]="--allow-downgrades -y";
 _CM[0]="echo -e \"${_C[4]}\" && exit 1";
 _CM[1]="sed -ri \"/${_R[0]}|${_R[1]}/d\" \"Himei/error.log\"";
 _CM[2]="cat \"Himei/error.log\"";
-_CM[3]="cat /etc/os-release";
+_CM[3]="\$(cat /etc/os-release | sed -n 's/^\(NAME=\)\|\(VERSION=\)/ /p' | sed 's/\"//g' | tr -d "\012")";
 
 _ERRORS() {
   local option=$1 text=($@) nowarn="${_H[0]}${_C[4]}\$(${_CM[2]})";
