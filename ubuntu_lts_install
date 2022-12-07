@@ -2,32 +2,30 @@
 
 # [ UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+[[ $? -gt 0 ]] && eval ${_E[0]};
 . Himei/variables;
 
 # [ INSTALL UBUNTU ]
-declare -a _LIBS=(proot-distro);
-echo -e "${_H[0]}${_M[4]}";
-pkg i --allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-echo -e "${_H[0]}${_M[5]}";
-echo -e "${_H[0]}${_M[6]}";
+_LIBS=(proot-distro);
+echo -e "${_M[5]}";
+pkg i ${_O[1]} ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
+echo -e "${_M[6]}" && sleep 2;
+echo -e "${_M[7]}";
 proot-distro install ubuntu 2> Himei/error.log 1> Himei/install.log || eval ${_E[1]};
-echo -e "${_H[0]}${_M[7]}";
-echo -e "${_H[0]}${_M[8]}";
+echo -e "${_M[8]}" && sleep 2;
+echo -e "${_M[9]}";
 proot-distro login ubuntu 2>&1 | grep -v "proot\swarning";
 
 # [ UPDATE & UPGRADE ]
 curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+[[ $? -gt 0 ]] && eval ${_E[0]};
 . Himei/variables;
-declare _INFOS="$(cat /etc/os-release | sed -rne 's/^(NAME=)|(VERSION=)/ /p' | sed -r 's/\"//g' | tr -d "\012")";
-_M[9]="Welcome to${_INFOS}";
-_M[10]="${_C[11]}run ${_C[7]}\"${_C[14]}proot-distro login ubuntu --shared-tmp${_C[7]}\"${_C[0]}";
+
 sleep 3 && clear;
-echo -e "${_C[12]}${_M[9]}";
 echo -e "${_M[10]}";
+echo -e "${_M[11]}";
 
 # [ CLEAN ]
-unset _C _H _M _EM _R _E _INFOS;
 rm -rf Himei;
 exit 0;
-unset _C _H _M _EM _R _E _LIBS;
 rm -rf Himei;
