@@ -105,7 +105,7 @@ msgs[7]="$(_H::CLRS 6)Installing Ubuntu$(_H::CLRS 0)";
 msgs[8]="$(_H::CLRS 11)Install Ubuntu completed$(_H::CLRS 0)";
 msgs[9]="$(_H::CLRS 6)Starting install packages Ubuntu$(_H::CLRS 0)";
 msgs[10]="$(_H::CLRS 3)Welcome to Ubuntu \$(cat /etc/os-release | sed -r -n \"s/^(VERSION=)//p\" | sed \"s/\\\"//g\")$(_H::CLRS 0)";
-msgs[11]="$(_H::CLRS 11)Run \"proot-distro login ubuntu --shared-tmp\"$(_H::CLRS 0)";
+msgs[11]="$(_H::CLRS 11)Run $(_H::CLRS 16 17)\\\"$(_H::CLRS 14 20)proot-distro login ubuntu --shared-tmp$(_H::CLRS 0 17)\\\"$(_H::CLRS 0)";
 msgs[12]="$(_H::CLRS 6)Starting downgrade Ubuntu$(_H::CLRS 0)";
 msgs[13]="$(_H::CLRS 11)Downgrade Ubuntu completed$(_H::CLRS 0)";
 msgs[14]="$(_H::CLRS 15)Starting repair dpkg packages$(_H::CLRS 0)";
