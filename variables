@@ -3,9 +3,7 @@
 _H::CLRS() {
 	local output;
 
-	for c in $@; do
-		output+="$(printf ${colors[$c]})";
-	done;
+	for c in $@; do output+="$(printf ${colors[$c]})"; done;
 
 	eval "echo -e \"$output\"";
 }
@@ -19,9 +17,9 @@ _H::MSGS() {
 _H::REGEXS() {
 	local output;
 
-	output="${regexs[$1]}";
-
-	eval "echo -e \"$output\"";
+	for n in $@; do output+="(${regexs[$n]})|"; done;
+	
+	eval "echo -e \"${output%|}\"";
 }
 _H::OPTS() {
 	local output;
@@ -31,17 +29,20 @@ _H::OPTS() {
 	eval "echo -e \"$output\"";
 }
 _H::ERRS() {
-	local opt=$1;
 	local output;
-
-	[[ $opt == --no-warn ]] && output="no warn";
-	[[ $opt == --default ]] && output="default";
-	[[ $opt == --custom-text ]] && output="custom text";
+	
+	[[ $1 == --no-warn ]] && output="\$(sed -r -i \"/^$(_H::REGEXS 1 2)/d\" .Himei/error.log && cat .Himei/error.log)";
+	[[ $1 == --default ]] && output="\$(cat .Himei/error.log)";
+	[[ $1 == --custom-text ]] && output="custom text";
 	
 	eval "echo -e \"$output\" && exit 1";
 }
 _H::LIBS() {
-	local get_pkg_number;
+	local output;
+
+	output="${pkgs[$1]}";
+
+	eval "echo -e \"$output\"";
 }
 
 #############################
@@ -50,13 +51,13 @@ _H::LIBS() {
 #							#
 #############################
 
-declare -a colors=();
-declare -a status_prefix=();
-declare -a prefixs=();
-declare -a msgs=();
-declare -a regexs=();
-declare -a opts=();
-declare -a pkgs=();
+declare -a colors;
+declare -a status_prefix;
+declare -a prefixs;
+declare -a msgs;
+declare -a regexs;
+declare -a opts;
+declare -a pkgs;
 
 colors[0]="\e[0m";    # [ RESET ]
 colors[1]="\e[34m";   # [ DARK BLUE ]
@@ -110,7 +111,7 @@ msgs[13]="$(_H::CLRS 11)Downgrade Ubuntu completed$(_H::CLRS 0)";
 msgs[14]="$(_H::CLRS 15)Starting repair dpkg packages$(_H::CLRS 0)";
 msgs[15]="$(_H::CLRS 15)Repair dpkg packages completed$(_H::CLRS 0)";
 
-regexs[1]="^$";
+regexs[1]="$";
 regexs[2]="WARNING: apt does not";
 regexs[3]="debconf: delaying package";
 
