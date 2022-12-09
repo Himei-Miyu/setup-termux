@@ -1,84 +1,123 @@
 #!/bin/bash
 
-declare -a _C=(); # [ COLORS ]
-declare -a _H=(); # [ PREFIX ]
-declare -a _M=(); # [ MESSAGES ]
-declare -a _EM=(); # [ ERROR MESSAGES ]
-declare -a _R=(); # [ REGULAR EXPRESSION ]
-declare -a _E=(); # [ ERROR ]
-declare -a _LIBS=(); # [ PKGS ]
-declare -a _O=(); # [ OPTIONS ]
-declare -a _CM=(); # [ SUB COMMANDS ]
+_H::CLRS() {
+	local output;
 
-_C[0]="\e[0m"; # [ RESET ]
-_C[1]="\e[34m"; # [ DARK BLUE ]
-_C[2]="\e[32m"; # [ DARK GREEN ]
-_C[3]="\e[36m"; # [ DARK AQUA ]
-_C[4]="\e[31m"; # [ DARK RED ]
-_C[5]="\e[35m"; # [ DARK PURPLE ]
-_C[6]="\e[33m"; # [ GOLD ]
-_C[7]="\e[37m"; # [ GRAY ]
-_C[8]="\e[90m"; # [ DARK GRAY ]
-_C[9]="\e[94m"; # [ BLUE ]
-_C[10]="\e[30m"; # [ BLACK ]
-_C[11]="\e[92m"; # [ GREEN ]
-_C[12]="\e[94m"; # [ AQUA ]
-_C[13]="\e[91m"; # [ LIGHT RED ]
-_C[14]="\e[95m"; # [ PINK ]
-_C[15]="\e[93m"; # [ YELLOW ]
-_C[16]="\e[97m"; # [ WHITE ]
-_C[17]="\e[1;m"; # [ BOLD TEXT ]
-_C[18]="\e[2;m"; # [ FAINT TEXT ]
-_C[19]="\e[3;m"; # [ ITALIC TEXT ]
-_C[20]="\e[4;m"; # [ UNDERLINE TEXT ]
-_C[20]="\e[7;m"; # [ REVERSE COLOR ]
-_C[21]="\e[9;m"; # [ STRIKETHROUGH TEXT ]
+	for c in $@; do
+		output+="$(printf ${colors[$c]})";
+	done;
 
-_H[0]="${_C[14]}${_C[17]}HIMEI ${_C[8]}> ";
+	eval "echo -e \"$output\"";
+}
+_H::MSGS() {
+	local output;
 
-_M[0]="";
-_M[1]="${_H[0]}${_C[11]}Updating packages${_C[0]}";
-_M[2]="${_H[0]}${_C[12]}Update packages completed${_C[0]}";
-_M[3]="${_H[0]}${_C[11]}Installing packages${_C[0]}";
-_M[4]="${_H[0]}${_C[12]}Install packages completed${_C[0]}";
-_M[5]="${_H[0]}${_C[11]}Installing packages additional${_C[0]}";
-_M[6]="${_H[0]}${_C[12]}Install packages additional completed${_C[0]}";
-_M[7]="${_H[0]}${_C[11]}Installing ubuntu${_C[0]}";
-_M[8]="${_H[0]}${_C[12]}Install ubuntu completed${_C[0]}";
-_M[9]="${_H[0]}${_C[11]}Starting install packages ubuntu${_C[0]}";
-_M[10]="${_C[12]}Welcome to\$(${_CM[3]})";
-_M[11]="${_C[11]}run ${_C[7]}\"${_C[14]}proot-distro login ubuntu --shared-tmp${_C[7]}\"${_C[0]}";
-_M[12]="${_H[0]}${_C[11]}Downgrading ubuntu${_C[0]}";
-_M[13]="${_H[0]}${_C[12]}Downgrade ubuntu completed${_C[0]}";
-_M[14]="${_H[0]}${_C[15]}Starting repair dpkg package${_C[0]}";
-_M[15]="${_H[0]}${_C[15]}Repair dpkg package completed${_C[0]}";
-_M[16]="${_H[0]}${_C[11]}Installing MongoDB CLI & Server${_C[0]}";
-_M[17]="${_H[0]}${_C[12]}Install MongoDB completed${_C[0]}";
+	output="${status_prefix[$1]}${prefixs[$2]}${msgs[$3]}";
 
-_EM[0]="${_H[0]}${_C[4]}Ubuntu is not installed${_C[0]}";
-_EM[1]="${_H[0]}${_C[4]}This command can not run outside ubuntu${_C[0]}";
+	eval "echo -e \"$output\"";
+}
+_H::REGEXS() {
+	local output;
 
-_R[0]="^$";
-_R[1]="WARNING: apt does not";
-_R[2]="debconf: delaying package";
+	output="${regexs[$1]}";
 
-_O[0]="Dpkg::Options::=--force-confdef --allow-downgrades -y";
-_O[1]="--allow-downgrades -y";
+	eval "echo -e \"$output\"";
+}
+_H::OPTS() {
+	local output;
 
-_CM[0]="echo -e \"${_C[4]}\" && exit 1";
-_CM[1]="sed -ri \"/${_R[0]}|${_R[1]}/d\" \"Himei/error.log\"";
-_CM[2]="cat \"Himei/error.log\"";
-_CM[3]="eval cat /etc/os-release | sed -n 's/^\(NAME=\)\|\(VERSION=\)/ /p' | sed 's/\"//g' | tr -d \"\012\"";
+	output="${opts[$1]}";
 
-_ERRORS() {
-  local option=$1 text=($@) nowarn="${_H[0]}${_C[4]}\$(${_CM[2]})";
-  text="${text[@]:1}";
-  [[ $option == --no-warn ]] && eval "${_CM[1]} && echo -e \"$nowarn\" && ${_CM[0]}";
-  [[ $option == --normal ]] && eval "${_CM[2]} && ${_CM[0]}";
-  [[ $option == --text ]] && eval "echo -e \"$text\" && ${_CM[0]}";
+	eval "echo -e \"$output\"";
+}
+_H::ERRS() {
+	local opt=$1;
+	local output;
+
+	[[ $opt == --no-warn ]] && output="no warn";
+	[[ $opt == --default ]] && output="default";
+	[[ $opt == --custom-text ]] && output="custom text";
+	
+	eval "echo -e \"$output\" && exit 1";
+}
+_H::LIBS() {
+	local get_pkg_number;
 }
 
-_E[0]="_ERRORS --no-warn";
-_E[1]="_ERRORS --normal";
-_E[2]="_ERRORS --text ${_EM[0]}";
-_E[3]="_ERRORS --text ${_EM[1]}";
+#############################
+#							#
+#		set variables		#
+#							#
+#############################
+
+declare -a colors=();
+declare -a status_prefix=();
+declare -a prefixs=();
+declare -a msgs=();
+declare -a regexs=();
+declare -a opts=();
+declare -a pkgs=();
+
+colors[0]="\e[0m";    # [ RESET ]
+colors[1]="\e[34m";   # [ DARK BLUE ]
+colors[2]="\e[32m";   # [ DARK GREEN ]
+colors[3]="\e[36m";   # [ DARK AQUA ]
+colors[4]="\e[31m";   # [ DARK RED ]
+colors[5]="\e[35m";   # [ DARK PURPLE ]
+colors[6]="\e[33m";   # [ GOLD ]
+colors[7]="\e[37m";   # [ GRAY ]
+colors[8]="\e[90m";   # [ DARK GRAY ]
+colors[9]="\e[94m";   # [ BLUE ]
+colors[10]="\e[30m";  # [ BLACK ]
+colors[11]="\e[92m";  # [ GREEN ]
+colors[12]="\e[94m";  # [ AQUA ]
+colors[13]="\e[91m";  # [ LIGHT RED ]
+colors[14]="\e[95m";  # [ PINK ]
+colors[15]="\e[93m";  # [ YELLOW ]
+colors[16]="\e[97m";  # [ WHITE ]
+colors[17]="\e[1;m";  # [ BOLD TEXT ]
+colors[18]="\e[2;m";  # [ FAINT TEXT ]
+colors[19]="\e[3;m";  # [ ITALIC TEXT ]
+colors[20]="\e[4;m";  # [ UNDERLINE TEXT ]
+colors[21]="\e[7;m";  # [ REVERSE colors ]
+colors[22]="\e[9;m";  # [ STRIKETHROUGH TEXT ]
+
+# number 0 is mean disabled
+prefixs[0]="" status_prefix[0]="" msgs[0]="";
+
+status_prefix[1]="$(_H::CLRS 12 17)[$(_H::CLRS 3)#$(_H::CLRS 12)]$(_H::CLRS 0) ";
+status_prefix[2]="$(_H::CLRS 12 17)[$(_H::CLRS 2)+$(_H::CLRS 12)]$(_H::CLRS 0) ";
+status_prefix[3]="$(_H::CLRS 12 17)[$(_H::CLRS 4)-$(_H::CLRS 12)]$(_H::CLRS 0) ";
+status_prefix[4]="$(_H::CLRS 12 17)[$(_H::CLRS 11)✔$(_H::CLRS 12)]$(_H::CLRS 0) ";
+status_prefix[5]="$(_H::CLRS 12 17)[$(_H::CLRS 15)!$(_H::CLRS 12)]$(_H::CLRS 0) ";
+status_prefix[6]="$(_H::CLRS 12 17)[$(_H::CLRS 13)✘$(_H::CLRS 12)]$(_H::CLRS 0) ";
+
+prefixs[1]="$(_H::CLRS 14 17 20)Himei$(_H::CLRS 0 8) >$(_H::CLRS 0) ";
+
+msgs[1]="$(_H::CLRS 6)Updating packages$(_H::CLRS 0)";
+msgs[2]="$(_H::CLRS 11)Update packages completed$(_H::CLRS 0)";
+msgs[3]="$(_H::CLRS 6)Installing packages$(_H::CLRS 0)";
+msgs[4]="$(_H::CLRS 11)Install packages completed$(_H::CLRS 0)";
+msgs[5]="$(_H::CLRS 6)Installing packages additional$(_H::CLRS 0)";
+msgs[6]="$(_H::CLRS 11)Install packages additional completed$(_H::CLRS 0)";
+msgs[7]="$(_H::CLRS 6)Installing Ubuntu$(_H::CLRS 0)";
+msgs[8]="$(_H::CLRS 11)Install Ubuntu completed$(_H::CLRS 0)";
+msgs[9]="$(_H::CLRS 6)Starting install packages Ubuntu$(_H::CLRS 0)";
+msgs[10]="$(_H::CLRS 3)Welcome to\$(cat /etc/os-release | sed -n 's/^\(NAME=\)\|\(VERSION=\)/ /p' | sed 's/\"//g' | tr -d \"\012\")$(_H::CLRS 0)";
+msgs[11]="$(_H::CLRS 11)Run \"proot-distro login ubuntu --shared-tmp\"$(_H::CLRS 0)";
+msgs[12]="$(_H::CLRS 6)Starting downgrade Ubuntu$(_H::CLRS 0)";
+msgs[13]="$(_H::CLRS 11)Downgrade Ubuntu completed$(_H::CLRS 0)";
+msgs[14]="$(_H::CLRS 15)Starting repair dpkg packages$(_H::CLRS 0)";
+msgs[15]="$(_H::CLRS 15)Repair dpkg packages completed$(_H::CLRS 0)";
+
+regexs[1]="^$";
+regexs[2]="WARNING: apt does not";
+regexs[3]="debconf: delaying package";
+
+opts[1]="Dpkg::Options::=--force-confdef --allow-downgrades -y";
+opts[2]="--allow-downgrades -y";
+
+pkgs[1]="dnsutils git neovim nmap nodejs openssh screen termux-api termux-services tracepath wget whois zip";
+pkgs[2]="proot-distro";
+pkgs[3]="gnupg nano";
+pkgs[4]="wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release";
