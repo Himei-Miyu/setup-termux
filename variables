@@ -35,7 +35,7 @@ _H::ERRS() {
 	[[ $1 == --default ]] && output="\$(cat .Himei/error.log)";
 	[[ $1 == --custom-text ]] && output="custom text";
 	
-	eval "echo -e \"$(_H::MSGS 6)$output\" && exit 1";
+	eval "echo -e \"$(_H::MSGS 6)$(_H::CLRS 13)$output$(_H::CLRS 0)\" && exit 1";
 }
 _H::LIBS() {
 	local output;
