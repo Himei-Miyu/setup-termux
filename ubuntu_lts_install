@@ -25,6 +25,6 @@ _H::MSGS 0 0 10;
 _H::MSGS 0 0 11;
 
 # [ CLEAN ]
-rm -rf Himei;
+rm -rf .Himei;
 exit 0;
-rm -rf Himei;
+rm -rf .Himei;
