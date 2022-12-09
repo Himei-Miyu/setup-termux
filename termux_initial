@@ -3,7 +3,7 @@
 # [ INSTALL & SETUP ]
 rm -rf .Himei && mkdir -p .Himei;
 touch .Himei/error.log .Himei/install.log;
-curl https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o .Himei/variables && . .Himei/variables;
+curl -s https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/variables -o .Himei/variables && . .Himei/variables;
 
 # [ UPDATE & UPGRADE ]
 _H::MSGS 1 1 1;
