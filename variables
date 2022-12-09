@@ -3,7 +3,7 @@
 _H::CLRS() {
 	local output;
 
-	for c in $@; do output+="$(printf ${colors[$c]})"; done;
+	for c in $@; do output+="${colors[$c]}"; done;
 
 	eval "echo -e \"$output\"";
 }
@@ -104,7 +104,7 @@ msgs[6]="$(_H::CLRS 11)Install packages additional completed$(_H::CLRS 0)";
 msgs[7]="$(_H::CLRS 6)Installing Ubuntu$(_H::CLRS 0)";
 msgs[8]="$(_H::CLRS 11)Install Ubuntu completed$(_H::CLRS 0)";
 msgs[9]="$(_H::CLRS 6)Starting install packages Ubuntu$(_H::CLRS 0)";
-msgs[10]="$(_H::CLRS 3)Welcome to\$(cat /etc/os-release | sed -n 's/^\(NAME=\)\|\(VERSION=\)/ /p' | sed 's/\"//g' | tr -d \"\012\")$(_H::CLRS 0)";
+msgs[10]="$(_H::CLRS 3)Welcome to Ubuntu \$(cat /etc/os-release | sed -r -n \"s/^(VERSION=)//p\" | sed \"s/\"//g\")$(_H::CLRS 0)";
 msgs[11]="$(_H::CLRS 11)Run \"proot-distro login ubuntu --shared-tmp\"$(_H::CLRS 0)";
 msgs[12]="$(_H::CLRS 6)Starting downgrade Ubuntu$(_H::CLRS 0)";
 msgs[13]="$(_H::CLRS 11)Downgrade Ubuntu completed$(_H::CLRS 0)";
