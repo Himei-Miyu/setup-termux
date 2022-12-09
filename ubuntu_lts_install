@@ -1,29 +1,28 @@
 #!/bin/bash
 
 # [ UPDATE & UPGRADE ]
-curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-[[ $? -gt 0 ]] && eval ${_E[0]};
-. Himei/variables;
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+[[ $? -gt 0 ]] && . .Himei/variables && _H::ERRS --no-warn;
+. .Himei/variables;
 
 # [ INSTALL UBUNTU ]
-_LIBS=(proot-distro);
-echo -e "${_M[5]}";
-pkg i ${_O[1]} ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
-echo -e "${_M[6]}" && sleep 2;
-echo -e "${_M[7]}";
-proot-distro install ubuntu 2> Himei/error.log 1> Himei/install.log || eval ${_E[1]};
-echo -e "${_M[8]}" && sleep 2;
-echo -e "${_M[9]}";
+_H::MSGS 1 1 5;
+pkg i $(_H::OPTS 2) $(_H::LIBS 2) 2> .Himei/error.log 1> .Himei/install.log || _H::ERRS --no-warn;
+_H::MSGS 1 1 6 && sleep 2;
+_H::MSGS 1 1 7;
+proot-distro install ubuntu 2> .Himei/error.log 1> .Himei/install.log || _H::ERRS --default;
+_H::MSGS 1 1 8 && sleep 2;
+_H::MSGS 1 1 9;
 proot-distro login ubuntu 2>&1 | grep -v "proot\swarning";
 
 # [ UPDATE & UPGRADE ]
-curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-[[ $? -gt 0 ]] && eval ${_E[0]};
-. Himei/variables;
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+[[ $? -gt 0 ]] && . .Himei/variables && _H::ERRS --no-warn;
+. .Himei/variables;
 
-sleep 3 && clear;
-eval "echo -e "${_M[10]}"";
-echo -e "${_M[11]}";
+sleep 5 && clear;
+_H::MSGS 0 0 10;
+_H::MSGS 0 0 11;
 
 # [ CLEAN ]
 rm -rf Himei;
