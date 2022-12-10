@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # [ UBUNTU UPDATE & UPGRADE ]
-curl -L https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
-[ $? -gt 0 ] && [ "$(cat Himei/error.log | grep -o 'delaying package')" == "delaying package" ] && curl -L https://raw.githubusercontent.com/Miyu-Tenshi/install-setup/main/dpkg_repair | bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_initial | bash;
+[[ $? -gt 0 ]] && . .Himei/variables && _H::ERRS --no-warn;
+. .Himei/variables;
 
-. Himei/variables;
 ! [ -e "/etc/os-release" ] && eval ${_E[3]};
 
 # [ UBUNTU INSTALL & SETUP ]
-declare -a _LIBS=(gnupg nano);
 echo -e "${_H[0]}${_M[4]}";
 pkg i --allow-downgrades -y ${_LIBS[@]} 2> Himei/error.log 1> Himei/install.log || eval ${_E[0]};
 echo -e "${_H[0]}${_M[5]}";
