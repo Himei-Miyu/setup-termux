@@ -3,6 +3,7 @@
 apt update;
 apt -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade;
 pkg i -y openssh;
-exec read -ep "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && echo -e "$PASSWORD\n$PASSWORD" | passwd;
+read -ep "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && wait && echo -e "$PASSWORD\n$PASSWORD" | passwd;
+
 sshd;
 echo -e "\e[92mSSH ONLINE";
