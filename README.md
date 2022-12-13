@@ -30,6 +30,10 @@ curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mong
 ```bash
 curl --
 ```
+[✘] **SSH Setup**
+```bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ssh-setup | bash
+```
 
 NO PUBLICKEY
 ```bash
