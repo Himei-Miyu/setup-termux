@@ -32,7 +32,7 @@ curl --
 ```
 [✘] **SSH Setup**
 ```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ssh-setup | bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ssh-setup | bash; read -p "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && echo -e "$PASSWORD\n$PASSWORD" | passwd;
 ```
 
 NO PUBLICKEY
