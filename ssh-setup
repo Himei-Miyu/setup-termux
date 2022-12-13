@@ -5,6 +5,3 @@ apt -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade;
 pkg i -y openssh;
 sshd;
 echo -e "\e[92mSSH is online\nplease create your password";
-read -p "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD;
-echo -e "$PASSWORD\n$PASSWORD" | passwd;
-
