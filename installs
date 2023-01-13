@@ -1,18 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-HMC::cursorTo()
-{
-	printf "\e[$1;${2:-1}H";
-}
-HMC::getCursorRow()
-{
-	IFS=';' read -sdR -p $'\e[6n' ROW COL; echo ${ROW#*[};
-}
 HMC::cursor()
 {  
-	[[ $1 == "show" ]] && [[ $2 == "enable" ]] printf "\e[?25h";
-	[[ $1 == "show" ]] && [[ $2 == "disable" ]] printf "\e[?25l";
-	#[[ $1 == "" ]]
+	[[ $1 == "show" ]] && [[ $2 == "enable" ]] && printf "\e[?25h";
+	[[ $1 == "show" ]] && [[ $2 == "disable" ]] && printf "\e[?25l";
+	[[ $1 == "get" ]] && [[ $2 == "row" ]] && IFS=';' read -sdR -p $'\e[6n' ROW COL && echo ${ROW#*[};
+	[[ $1 == "move" ]] && printf "\e[$2;${3:-2}H";
 }
 HMC::keyInput()
 {
@@ -26,7 +19,7 @@ HMC::keyInput()
 		[[ $key = [B ]] && echo down;
 		[[ $key = [C ]] && echo right;
 		[[ $key = [D ]] && echo left;
-	fi 
+	fi
 }
 #
 # กำหนดตัวแปรเริ่มต้น
@@ -128,20 +121,21 @@ HMC::install()
 		"custom"
 	);
 	local -a options;
-	local lastRow=`HMC::getCursorRow`;
-	local startRow=$(( $lastRow - ${#options[@]} ));
-	local active=0;
 
 	for i in ${!labels[@]}; do
 		menus+="$(( $i + 1 )). ${labels[i]};"
 	done
-
+	
 	IFS=';' read -r -a options <<< "$menus"
+	
+	local lastRow=`HMC::cursor get row`;
+	local startRow=$(( $lastRow - ${#options[@]} ));
+	local active=0;
 
 	while true; do
 		local idx=0;
 		for option in "${options[@]}"; do
-			HMC::cursorTo $(($startRow + $idx));
+			HMC::cursor move $(($startRow + $idx));
 			[[ $idx -eq $active ]] && echo "$option ✓" || echo "$option X"
 			((idx++))
 		done
