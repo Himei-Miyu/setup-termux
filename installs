@@ -1,8 +1,37 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
+HMC::cursorTo()
+{
+	printf "\e[$1;${2:-1}H";
+}
+HMC::getCursorRow()
+{
+	IFS=';' read -sdR -p $'\E[6n' ROW COL; echo ${ROW#*[};
+}
+HMC::cursorShow()
+{ 
+	[[ $1 == "off" ]] && printf "\e[?25l" || printf "\e[?25h";
+}
+HMC::keyInput()
+{
+	local key;
+	IFS= read -rsn1 key;
+	[[ $key == "" ]] && echo enter;
+	[[ $key = $'\x20' ]] && echo space;
+	if [[ $key = $'\x1b' ]]; then
+		read -rsn2 key;
+		[[ $key = [A ]] && echo up;
+		[[ $key = [B ]] && echo down;
+		[[ $key = [C ]] && echo right;
+		[[ $key = [D ]] && echo left;
+	fi 
+}
+#
+# กำหนดตัวแปรเริ่มต้น
+# ต้องกำหนดเพื่อให้คำสั่งอื่นสามารถใช้งานได้
+#
 HMC::initializeVariable()
 {
-	declare -ax _HMC_colors;
+	declare -ga _HMC_colors;
 	_HMC_colors[0]=$(printf "\e[0m");    # [ RESET ]
 	_HMC_colors[1]=$(printf "\e[34m");   # [ DARK BLUE ]
 	_HMC_colors[2]=$(printf "\e[32m");   # [ DARK GREEN ]
@@ -27,40 +56,101 @@ HMC::initializeVariable()
 	_HMC_colors[21]=$(printf "\e[7m");  # [ REVERSE _HMC_colors ]
 	_HMC_colors[22]=$(printf "\e[9m");  # [ STRIKETHROUGH TEXT ]
 }
+#
+# เปลี่ยนข้อความให้มีสี
+#
+#
 HMC::format()
 {
 	local rawText="$@";
 	echo -e $(sed -r "s/§r/${_HMC_colors[0]}/g;s/§1/${_HMC_colors[1]}/g;s/§2/${_HMC_colors[2]}/g;s/§3/${_HMC_colors[3]}/g;s/§4/${_HMC_colors[4]}/g;s/§5/${_HMC_colors[5]}/g;s/§6/${_HMC_colors[6]}/g;s/§7/${_HMC_colors[7]}/g;s/§8/${_HMC_colors[8]}/g;s/§9/${_HMC_colors[9]}/g;s/§0/${_HMC_colors[10]}/g;s/§a/${_HMC_colors[11]}/g;s/§b/${_HMC_colors[12]}/g;s/§c/${_HMC_colors[13]}/g;s/§d/${_HMC_colors[14]}/g;s/§e/${_HMC_colors[15]}/g;s/§f/${_HMC_colors[16]}/g;s/§l/${_HMC_colors[17]}/g;s/§t/${_HMC_colors[18]}/g;s/§o/${_HMC_colors[19]}/g;s/§n/${_HMC_colors[20]}/g;s/§y/${_HMC_colors[21]}/g;s/§m/${_HMC_colors[22]}/g;" <<< $rawText);
 }
+#
+# แสดงข้อความปกติทั่วไป
+#
+#
 HMC::msg()
 {
-	local text="§f[§l§dH§5M§eC§r]§7:§a $@§r";
+	local text="§l§f[§dH§5M§eC§f]§r§8:§a $@§r";
 	HMC::format $text;
 }
+#
+# แสดงข้อความเตือนเมื่อมีปัญหาแต่ไม่ร้ายแรง
+#
+#
 HMC::warn()
 {
-	local text="§f[§l§dH§5M§eC§r]§7:§e $@§r"
+	local text="§l§f[§dH§5M§eC§f]§r§8:§e $@§r"
 	HMC::format $text;
 }
+#
+# แสดงข้อความผิดพลาดเมื่อล้มเหลวการทำงาน
+# พร้อมส่งออก และคืนค่าสถานะ 1
+#
 HMC::error()
 {
-	local text="§f[§l§dH§5M§eC§r]§7:§c $@§r"
+	local text="§l§f[§dH§5M§eC§f]§r§8:§c $@§r"
 	HMC::format $text;
 	exit 1;
 }
-
+#
+# อัพเดทแพ็คเกจ
+# และอัพเกรดแพคเกจ
+#
 HMC::update()
 {
 	apt-get update || return $?;
 	apt-get -y -o Dpkg::Options::=--force-confdef upgrade || return $?;
 }
 
-#HMC::install(){}
+HMC::install()
+{
+	local title="what you want to installs?";
+	local labels=(
+		"Install Everything"
+		"Termux Utilities"
+		"Ubuntu Latest (22.04.1 LTS)"
+		"MongoDB CLI & Server"
+		"MongoDB Server"
+		"SSH Server"
+		"Custom Install Packages"
+	);
+	local values=()
+	local options=()
+	local lastRow=`HMC::getCursorRow`
+	local startRow=$(( $lastRow - ${#options[@]} ))
+	local active=0
+
+	for i in ${!labels[@]}; do
+		menus+="$(( $i + 1 )). ${labels[i]};"
+	done
+
+	IFS=';' read -r -a options <<< "$menus"
+
+	while true; do
+		local idx=0
+		for option in "${options[@]}"; do
+			HMC::cursorTo $(($startRow + $idx))
+			[[ $idx -eq $active ]] && echo "$option ✓" || echo "$option X"
+			((idx++))
+		done
+		case `HMC::keyInput` in
+			space) echo $active;;
+			enter) break;;
+			up) ((active--));
+				[[ $active < 0 ]] && active=$((${#options[@]} - 1));;
+			down) ((active++));
+				[[ $active > ${#options[@]} ]] && active=0;;
+			right) echo $active;;
+			left) echo $active;;
+		esac
+	done
+}
 
 HMC::initial()
 {
 	HMC::initializeVariable;
-	#mkdir -p $HOME/.HMC && cd $HOME/.HMC;
-	#touch errors.log installs.log
+	mkdir -p $HOME/.HMC && cd $HOME/.HMC;
+	touch errors.log installs.log
 }
 HMC::initial
