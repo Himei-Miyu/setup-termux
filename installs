@@ -124,7 +124,12 @@ HMC::install()
 	local lastRow=`HMC::cursor get row`;
 	local startRow=$(( $lastRow - ${#options[@]} ));
 	local order=0;
+	# do somthing
+	#local -a selected;
 
+	for ((i=0; i<${#options[@]}; i++)) do
+		printf "\n";
+	done
 	while true; do
 		local idx=0;
 		for option in "${options[@]}"; do
