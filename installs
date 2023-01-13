@@ -34,11 +34,20 @@ HMC::format()
 }
 HMC::msg()
 {
-	local text="§a$1";
+	local text="§f[§l§dH§5M§eC§r]§7:§a $1§r";
 	HMC::format $text;
 }
-#HMC::warn(){}
-#HMC::error(){}
+HMC::warn()
+{
+	local text="§f[§l§dH§5M§eC§r]§7:§e $1§r"
+	HMC::format $text;
+}
+HMC::error()
+{
+	local text="§f[§l§dH§5M§eC§r]§7:§c $1§r"
+	HMC::format $text;
+	exit 1;
+}
 
 HMC::update()
 {
