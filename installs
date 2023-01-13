@@ -120,7 +120,7 @@ HMC::install()
 		"sshsv"
 		"custom"
 	);
-	local -a options=($labels[@])
+	local options=(${labels[@]})
 	local lastRow=`HMC::cursor get row`;
 	local startRow=$(( $lastRow - ${#options[@]} ));
 	local active=0;
