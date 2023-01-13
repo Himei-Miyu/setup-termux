@@ -120,14 +120,7 @@ HMC::install()
 		"sshsv"
 		"custom"
 	);
-	local -a options;
-
-	for i in ${!labels[@]}; do
-		menus+="$(( $i + 1 )). ${labels[i]};"
-	done
-	
-	IFS=';' read -r -a options <<< "$menus"
-	
+	local -a options=($labels[@])
 	local lastRow=`HMC::cursor get row`;
 	local startRow=$(( $lastRow - ${#options[@]} ));
 	local active=0;
@@ -140,14 +133,14 @@ HMC::install()
 			((idx++))
 		done
 		case `HMC::keyInput` in
-			space) echo $active;;
+			space) "";;
 			enter) break;;
 			up) ((active--));
 				[[ $active < 0 ]] && active=$((${#options[@]} - 1));;
 			down) ((active++));
 				[[ $active > ${#options[@]} ]] && active=0;;
-			right) echo $active;;
-			left) echo $active;;
+			right) "";;
+			left) "";;
 		esac
 	done
 }
