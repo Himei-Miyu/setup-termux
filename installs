@@ -27,10 +27,16 @@ HMC::initializeVariable()
 	_HMC_colors[21]=$(printf "\e[7m");  # [ REVERSE _HMC_colors ]
 	_HMC_colors[22]=$(printf "\e[9m");  # [ STRIKETHROUGH TEXT ]
 }
+HMC::format()
+{
+	local rawText="$1";
+	echo -e "$(sed -r 's/§r/${_HMC_colors[0]}/g;s/§1/${_HMC_colors[1]}/g;' <<< $rawText)"
+}
 
 HMC::msg()
 {
-	local rawText="$1";
+	local rawText="§a$1";
+	text=$(sed 's/§r/${_HMC_colors[0]}/g;')
 }
 #HMC::warn(){}
 #HMC::error(){}
