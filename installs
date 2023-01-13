@@ -113,14 +113,14 @@ HMC::install()
 	);
 	local values=(
 		"all"
-		"utility"
+		"utils"
 		"ubuntu"
 		"mongodb"
 		"mongodbsv"
 		"sshsv"
 		"custom"
 	);
-	local options=(${labels[@]})
+	local options=(${values[@]})
 	local lastRow=`HMC::cursor get row`;
 	local startRow=$(( $lastRow - ${#options[@]} ));
 	local order=0;
