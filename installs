@@ -32,7 +32,11 @@ HMC::format()
 	local rawText="$1";
 	echo -e "$(sed -r 's/§r/${_HMC_colors[0]}/g;s/§1/${_HMC_colors[1]}/g;' <<< $rawText)"
 }
-
+_H::msg() {
+	local rawText="§a$@§r";
+	local text=$(sed -r "s/§r/${colors[0]}/g;s/§1/${colors[1]}/g;s/§2/${colors[2]}/g;s/§3/${colors[3]}/g;s/§4/${colors[4]}/g;s/§5/${colors[5]}/g;s/§6/${colors[6]}/g;s/§7/${colors[7]}/g;s/§8/${colors[8]}/g;s/§9/${colors[9]}/g;s/§0/${colors[10]}/g;s/§a/${colors[11]}/g;s/§b/${colors[12]}/g;s/§c/${colors[13]}/g;s/§d/${colors[14]}/g;s/§e/${colors[15]}/g;s/§f/${colors[16]}/g;s/§l/${colors[17]}/g;s/§t/${colors[18]}/g;s/§o/${colors[19]}/g;s/§n/${colors[20]}/g;s/§y/${colors[21]}/g;s/§m/${colors[22]}/g;" <<< $rawText);
+	echo -e "$text";
+}
 HMC::msg()
 {
 	local rawText="§a$1";
