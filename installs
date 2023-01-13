@@ -6,11 +6,13 @@ HMC::cursorTo()
 }
 HMC::getCursorRow()
 {
-	IFS=';' read -sdR -p $'\E[6n' ROW COL; echo ${ROW#*[};
+	IFS=';' read -sdR -p $'\e[6n' ROW COL; echo ${ROW#*[};
 }
-HMC::cursorShow()
-{ 
-	[[ $1 == "off" ]] && printf "\e[?25l" || printf "\e[?25h";
+HMC::cursor()
+{  
+	[[ $1 == "show" ]] && [[ $2 == "enable" ]] printf "\e[?25h";
+	[[ $1 == "show" ]] && [[ $2 == "disable" ]] printf "\e[?25l";
+	#[[ $1 == "" ]]
 }
 HMC::keyInput()
 {
@@ -137,9 +139,9 @@ HMC::install()
 	IFS=';' read -r -a options <<< "$menus"
 
 	while true; do
-		local idx=0
+		local idx=0;
 		for option in "${options[@]}"; do
-			HMC::cursorTo $(($startRow + $idx))
+			HMC::cursorTo $(($startRow + $idx));
 			[[ $idx -eq $active ]] && echo "$option ✓" || echo "$option X"
 			((idx++))
 		done
