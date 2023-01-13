@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
+
 HMC::cursorTo()
 {
 	printf "\e[$1;${2:-1}H";
@@ -115,11 +116,19 @@ HMC::install()
 		"SSH Server"
 		"Custom Install Packages"
 	);
-	local values=()
-	local options=()
-	local lastRow=`HMC::getCursorRow`
-	local startRow=$(( $lastRow - ${#options[@]} ))
-	local active=0
+	local values=(
+		"all"
+		"utility"
+		"ubuntu"
+		"mongodb"
+		"mongodbsv"
+		"sshsv"
+		"custom"
+	);
+	local -a options;
+	local lastRow=`HMC::getCursorRow`;
+	local startRow=$(( $lastRow - ${#options[@]} ));
+	local active=0;
 
 	for i in ${!labels[@]}; do
 		menus+="$(( $i + 1 )). ${labels[i]};"
