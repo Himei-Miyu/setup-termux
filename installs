@@ -123,22 +123,22 @@ HMC::install()
 	local options=(${labels[@]})
 	local lastRow=`HMC::cursor get row`;
 	local startRow=$(( $lastRow - ${#options[@]} ));
-	local active=0;
+	local order=0;
 
 	while true; do
 		local idx=0;
 		for option in "${options[@]}"; do
 			HMC::cursor move $(($startRow + $idx));
-			[[ $idx -eq $active ]] && echo "$option ✓" || echo "$option X"
+			[[ $idx == $order ]] && echo "$option ✓" || echo "$option X"
 			((idx++))
 		done
 		case `HMC::keyInput` in
 			space) "";;
 			enter) break;;
-			up) ((active--));
-				[[ $active < 0 ]] && active=$((${#options[@]} - 1));;
-			down) ((active++));
-				[[ $active > ${#options[@]} ]] && active=0;;
+			up) ((order--));
+				[[ $order < 0 ]] && order=$((${#options[@]} - 1));;
+			down) ((order++));
+				[[ $order > ${#options[@]} ]] && order=0;;
 			right) "";;
 			left) "";;
 		esac
