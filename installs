@@ -38,7 +38,7 @@ HMC::initializeVariable()
 HMC::format()
 {
 	local rawText="$@";
-	echo -e $(sed -r "s/§r/${_HMC_colors[0]}/g;s/§1/${_HMC_colors[1]}/g;s/§2/${_HMC_colors[2]}/g;s/§3/${_HMC_colors[3]}/g;s/§4/${_HMC_colors[4]}/g;s/§5/${_HMC_colors[5]}/g;s/§6/${_HMC_colors[6]}/g;s/§7/${_HMC_colors[7]}/g;s/§8/${_HMC_colors[8]}/g;s/§9/${_HMC_colors[9]}/g;s/§0/${_HMC_colors[10]}/g;s/§a/${_HMC_colors[11]}/g;s/§b/${_HMC_colors[12]}/g;s/§c/${_HMC_colors[13]}/g;s/§d/${_HMC_colors[14]}/g;s/§e/${_HMC_colors[15]}/g;s/§f/${_HMC_colors[16]}/g;s/§l/${_HMC_colors[17]}/g;s/§t/${_HMC_colors[18]}/g;s/§o/${_HMC_colors[19]}/g;s/§n/${_HMC_colors[20]}/g;s/§y/${_HMC_colors[21]}/g;s/§m/${_HMC_colors[22]}/g;" <<< $rawText);
+	echo -e "$(sed -r "s/§r/${_HMC_colors[0]}/g;s/§1/${_HMC_colors[1]}/g;s/§2/${_HMC_colors[2]}/g;s/§3/${_HMC_colors[3]}/g;s/§4/${_HMC_colors[4]}/g;s/§5/${_HMC_colors[5]}/g;s/§6/${_HMC_colors[6]}/g;s/§7/${_HMC_colors[7]}/g;s/§8/${_HMC_colors[8]}/g;s/§9/${_HMC_colors[9]}/g;s/§0/${_HMC_colors[10]}/g;s/§a/${_HMC_colors[11]}/g;s/§b/${_HMC_colors[12]}/g;s/§c/${_HMC_colors[13]}/g;s/§d/${_HMC_colors[14]}/g;s/§e/${_HMC_colors[15]}/g;s/§f/${_HMC_colors[16]}/g;s/§l/${_HMC_colors[17]}/g;s/§t/${_HMC_colors[18]}/g;s/§o/${_HMC_colors[19]}/g;s/§n/${_HMC_colors[20]}/g;s/§y/${_HMC_colors[21]}/g;s/§m/${_HMC_colors[22]}/g;" <<< $rawText)";
 }
 #
 # แสดงข้อความปกติทั่วไป
@@ -135,14 +135,14 @@ HMC::toggleOption()
 HMC::install()
 {
 	local labels=(
-		"Install everything"
-		"Termux Utilities"
-		"Ubuntu 22.04 LTS"
-		"MongoDB CLI & Server"
-		"MongoDB Server"
-		"SSH Server"
-		"VSCode Server"
-		"Custom Install Packages"
+		"`HMC::format §t§3Install everything§r`"
+		"`HMC::format §tTermux Utilities§r`"
+		"`HMC::format §tUbuntu 22.04 LTS§r`"
+		"`HMC::format §t§aMongoDB CLI \& §eServer§r`"
+		"`HMC::format §t§aMongoDB §eServer§r`"
+		"`HMC::format §tSSH §eServer§r`"
+		"`HMC::format §t§3VSCode §eServer§r`"
+		"`HMC::format §tCustom Install Packages§r`"
 	)
 	local -a isSelected;
 	local defaults=(false);
@@ -153,15 +153,17 @@ HMC::install()
 	local selecting=0;
 	local lastRow=`HMC::cursor row`;
 	local firstRow=$(( $lastRow - ${#labels[@]} ));
+	local symbolChecked=`HMC::format §a§l✔§r`;
+	local colors=(`HMC::format §l` `HMC::format §r`)
 	HMC::cursor show off;
 	while true; do
 		local idx=0;
 		for i in ${!labels[@]}; do
 			local prefix=" ";
-			[[ ${isSelected[$idx]} == "true" ]] && prefix="✔"
+			[[ ${isSelected[$idx]} == "true" ]] && prefix="$symbolChecked"
 
 			HMC::cursor move $(( $firstRow + $idx ));
-			[[ $idx -eq $selecting ]] && echo "$prefix  ${labels[$i]}" || echo "$prefix ${labels[$i]} ";
+			[[ $idx -eq $selecting ]] && echo "$prefix  ${colors[0]}${labels[$i]}${colors[1]}" || echo "$prefix ${labels[$i]} ";
 			(( idx++ ));
 		done
 		case `HMC::keyInput` in
