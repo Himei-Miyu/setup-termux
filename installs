@@ -1,26 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-HMC::cursor()
-{  
-	[[ $1 == "show" ]] && [[ $2 == "enable" ]] && printf "\e[?25h";
-	[[ $1 == "show" ]] && [[ $2 == "disable" ]] && printf "\e[?25l";
-	[[ $1 == "get" ]] && [[ $2 == "row" ]] && IFS=';' read -sdR -p $'\e[6n' ROW COL && echo ${ROW#*[};
-	[[ $1 == "move" ]] && printf "\e[$2;${3:-2}H";
-}
-HMC::keyInput()
-{
-	local key;
-	IFS= read -rsn1 key;
-	[[ $key == "" ]] && echo enter;
-	[[ $key = $'\x20' ]] && echo space;
-	if [[ $key = $'\x1b' ]]; then
-		read -rsn2 key;
-		[[ $key = [A ]] && echo up;
-		[[ $key = [B ]] && echo down;
-		[[ $key = [C ]] && echo right;
-		[[ $key = [D ]] && echo left;
-	fi
-}
 #
 # กำหนดตัวแปรเริ่มต้น
 # ต้องกำหนดเพื่อให้คำสั่งอื่นสามารถใช้งานได้
@@ -98,56 +77,108 @@ HMC::update()
 	apt-get update || return $?;
 	apt-get -y -o Dpkg::Options::=--force-confdef upgrade || return $?;
 }
-
+#
+# ปรับแต่ง cursor
+#
+#
+HMC::cursor()
+{
+	[[ "show" == "$1" ]] &&
+		{
+			[[ "off" == "$2" ]] && printf "\e[?25l" || printf "\e[?25h";
+		}
+	[[ "move" == "$1" ]] && 
+		{
+			printf "\e[$2;${3:-1}H";
+		}
+	[[ "row" == "$1" ]] && 
+		{
+			IFS=';' read -sdR -p $'\e[6n' ROW COL;
+			echo "${ROW#*[}";
+		}
+}
+#
+# รับ input จากแป้นพิมพ์
+#
+#
+HMC::keyInput()
+{
+	local key;
+	IFS= read -rsn1 key;
+	[[ -z "$key" ]] && echo enter;
+	[[ $'\x20' == "$key" ]] && echo space;
+	[[ $'\x1b' == "$key" ]] &&
+		{
+			read -rsn2 key;
+			[[ "[A" == "$key" ]] && echo up;
+			[[ "[B" == "$key" ]] && echo down;
+			[[ "[C" == "$key" ]] && echo right;
+			[[ "[D" == "$key" ]] && echo left;
+		}
+}
+#
+# เมนูสลับค่า จริง-เท็จ
+# ใช้คู่กับ function HMC::install
+#
+HMC::toggleOption()
+{	
+	local selected=$1;
+	eval local isSelecteds=("\${${selected}[@]}");
+	local selecting=$2;
+	[[ "${isSelecteds[$selecting]}" == "true" ]] && isSelecteds[$selecting]="false" || isSelecteds[$selecting]="true";
+	eval $selected='("${isSelecteds[@]}")';
+}
+#
+# ลูกศรเลือกรายการติดตั้งแพคเกจ
+#
+#
 HMC::install()
 {
-	local title="what you want to installs?";
 	local labels=(
-		"Install Everything"
+		"Install everything"
 		"Termux Utilities"
-		"Ubuntu Latest (22.04.1 LTS)"
+		"Ubuntu 22.04 LTS"
 		"MongoDB CLI & Server"
 		"MongoDB Server"
 		"SSH Server"
+		"VSCode Server"
 		"Custom Install Packages"
-	);
-	local values=(
-		"all"
-		"utils"
-		"ubuntu"
-		"mongodb"
-		"mongodbsv"
-		"sshsv"
-		"custom"
-	);
-	local options=(${values[@]})
-	local lastRow=`HMC::cursor get row`;
-	local startRow=$(( $lastRow - ${#options[@]} ));
-	local order=0;
-	# do somthing
-	#local -a selected;
-
-	for ((i=0; i<${#options[@]}; i++)) do
-		printf "\n";
+	)
+	local -a isSelected;
+	local defaults=(false);
+	for i in ${!labels[@]}; do
+		isSelected+=("${defaults[$i]:-false}")
+		printf "\n"
 	done
+	local selecting=0;
+	local lastRow=`HMC::cursor row`;
+	local firstRow=$(( $lastRow - ${#labels[@]} ));
+	HMC::cursor show off;
 	while true; do
 		local idx=0;
-		for option in "${options[@]}"; do
-			HMC::cursor move $(($startRow + $idx));
-			[[ $idx == $order ]] && echo "$option ✓" || echo "$option X"
-			((idx++))
+		for i in ${!labels[@]}; do
+			local prefix=" ";
+			[[ ${isSelected[$idx]} == "true" ]] && prefix="✔"
+
+			HMC::cursor move $(( $firstRow + $idx ));
+			[[ $idx -eq $selecting ]] && echo "$prefix  ${labels[$i]}" || echo "$prefix ${labels[$i]} ";
+			(( idx++ ));
 		done
 		case `HMC::keyInput` in
-			space) "";;
 			enter) break;;
-			up) ((order--)) && [[ $order < 0 ]] && order=$((${#options[@]} - 1));;
-			down) ((order++)) && [[ $order > ${#options[@]} ]] && order=0;;
-			right) "";;
-			left) "";;
+			space) HMC::toggleOption "isSelected" $selecting;;
+			up) (( selecting-- )); [[ $selecting -lt 0 ]] && selecting=$(( ${#labels[@]} - 1 ));;
+			down) (( selecting++ )); [[ $selecting -ge ${#labels[@]} ]] && selecting=0;;
+			right) HMC::toggleOption "isSelected" $selecting;;
+			left) HMC::toggleOption "isSelected" $selecting;;
 		esac
 	done
+	HMC::cursor show;
 }
-
+#
+#
+#
+#
 HMC::initial()
 {
 	HMC::initializeVariable;
