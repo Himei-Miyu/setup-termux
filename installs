@@ -31,16 +31,18 @@ HMC::initializeVariables()
 	_HMC_colors[21]="$(printf "\e[7m")";   # [ REVERSE _HMC_colors ]
 	_HMC_colors[22]="$(printf "\e[9m")";   # [ STRIKETHROUGH TEXT ]
 }
-#
-# เปลี่ยนข้อความให้มีสี
-#
+# 
+# @descriptions เปลี่ยนข้อความให้มีสี
+# @params string			- รับชื่อตัวแปรด้านนอก
+# @params string | array	- รับข้อความที่ยังไม่ได้เปลี่ยนแปลงสี
+# @returns string | array	- ส่งค่าไปให้ตัวแปรด้านนอกตามชื่อที่ส่งเข้ามา
 #
 HMC::replaceColorText()
 {
 	local output=$1;
-	local rawText=($2);
+	local raw_text=($2);
 	local -a text;
-	for i in ${!rawText[@]}; do
+	for i in ${!raw_text[@]}; do
 		text+=($(sed -r "\
 		s/§r/${_HMC_colors[0]}/g; \
 		s/§1/${_HMC_colors[1]}/g; \
@@ -65,9 +67,20 @@ HMC::replaceColorText()
 		s/§n/${_HMC_colors[20]}/g; \
 		s/§y/${_HMC_colors[21]}/g; \
 		s/§m/${_HMC_colors[22]}/g; \
-		" <<< ${rawText[$i]}));
+		" <<< ${raw_text[$i]}));
 	done
-	[[ ${#rawText[@]} -eq 1 ]] && eval $output="${text[0]}" || eval $output="(${text[@]})";
+	[[ ${#raw_text[@]} -eq 1 ]] && eval $output="${text[0]}" || eval $output="(${text[@]})";
+}
+#
+# @params string
+# @returns string
+#
+HMC::colorText()
+{
+	local raw_text="$1";
+	local text;
+	HMC::replaceColorText "text" $raw_text;
+	echo -e "$text";
 }
 #
 # แสดงข้อความปกติทั่วไป
@@ -75,10 +88,8 @@ HMC::replaceColorText()
 #
 HMC::logMessage()
 {
-	local text="§l§f[§dH§5M§eC§f]§r§8:§a $@§r";
-	local output;
-	HMC::replaceColorText "output" $text;
-	echo $output
+	local raw_text="§l§f[§dH§5M§eC§f]§r§8:§a $@§r";
+	HMC::colorText $raw_text;
 }
 #
 # แสดงข้อความเตือนเมื่อมีปัญหาแต่ไม่ร้ายแรง
@@ -86,10 +97,8 @@ HMC::logMessage()
 #
 HMC::logWarn()
 {
-	local text="§l§f[§dH§5M§eC§f]§r§8:§e $@§r";
-	local output;
-	HMC::replaceColorText "output" $text;
-	echo $output
+	local raw_text="§l§f[§dH§5M§eC§f]§r§8:§e $@§r";
+	HMC::colorText $raw_text;
 }
 #
 # แสดงข้อความผิดพลาดเมื่อล้มเหลวการทำงาน
@@ -97,10 +106,8 @@ HMC::logWarn()
 #
 HMC::logError()
 {
-	local text="§l§f[§dH§5M§eC§f]§r§8:§c $@§r";
-	local output;
-	HMC::replaceColorText "output" $text;
-	echo $output
+	local raw_text="§l§f[§dH§5M§eC§f]§r§8:§c $@§r";
+	HMC::colorText $raw_text;
 	exit 1;
 }
 #
@@ -156,11 +163,11 @@ HMC::getKeyInput()
 #
 HMC::toggleOption()
 {	
-	local selected=$1;
-	eval local isSelecteds=("\${${selected}[@]}");
-	local selecting=$2;
-	[[ "${isSelecteds[$selecting]}" == "true" ]] && isSelecteds[$selecting]="false" || isSelecteds[$selecting]="true";
-	eval $selected='("${isSelecteds[@]}")';
+	local output=$1;
+	eval local is_selected=("\${${output}[@]}");
+	local order_selecting=$2;
+	[[ "${is_selected[$order_selecting]}" == "true" ]] && is_selected[$order_selecting]="false" || is_selected[$order_selecting]="true";
+	eval $output='("${is_selected[@]}")';
 }
 #
 # ลูกศรเลือกรายการติดตั้งแพคเกจ
@@ -169,69 +176,79 @@ HMC::toggleOption()
 HMC::installs()
 {
 	local output="$1";
-	local labelsString="$2";
-	local -a labels;
+	local label_text_list="$2";
+	local -a label_list;
 
-	IFS=';' read -r -a labels <<< "$labelsString";
+	IFS=';' read -r -a label_list <<< "$label_text_list";
 	
-	local -a isSelected;
-	local defaultsChecked=($3);
-	local selecting=0;
-	local selected=`HMC::format §a§l✔§r`;
-	local colors=(`HMC::format §l` `HMC::format §r`);
+	local -a is_selected_list;
+	local is_selected_list_default=($3);
+	local order_selecting=0;
+	local selected_text=`HMC::replaceColorText selected_text §a§l✔§r`;
+	local color_list=(`HMC::replaceColorText color_list §l §r`);
 	
-	for i in ${!labels[@]}; do
-		isSelected+=("${defaultsChecked[$i]:-false}")
-		printf "\n"
+	for i in ${!label_list[@]}; do
+		is_selected_list+=("${is_selected_list_default[$i]:-false}");
+		printf "\n";
 	done
 
-	local lastRow=`HMC::cursor row`;
-	local firstRow=$(( $lastRow - ${#labels[@]} ));
+	local end_row=`HMC::cursor get row`;
+	local start_row=$(( $end_row - ${#label_list[@]} ));
 	
-	trap "HMC::cursor show;echo \"installing has canceled\"; break" SIGINT;
-	HMC::cursor show off;
+	HMC::cursor "show" "disable";
+
+	trap "HMC::cursor 'show' 'enable';echo \"installing has canceled\"; break" SIGINT;
 
 	while true; do
-		local idx=0;
-		for i in ${!labels[@]}; do
-			local prefix=" ";
-			[[ ${isSelected[$idx]} == "true" ]] && prefix="$selected";
 
-			HMC::cursor move $(( $firstRow + $idx ));
-			[[ $idx -eq $selecting ]] && echo "$prefix  ${colors[0]}${labels[$i]}${colors[1]}" || echo "$prefix ${labels[$i]} ";
-			(( idx++ ));
+		local index=0;
+
+		for i in ${!label_list[@]}; do
+
+			local prefix=" ";
+
+			[[ ${is_selected_list[$index]} == "true" ]] && prefix="$selected_text";
+
+			HMC::cursor "moveto" $(( $start_row + $index ));
+
+			[[ $index -eq $order_selecting ]] && echo "$prefix  ${color_list[0]}${label_list[$i]}${color_list[1]}" || echo "$prefix ${label_list[$i]} ";
+
+			(( index++ ));
 		done
 		case `HMC::keyInput` in
 			enter) break;;
-			space) HMC::toggleOption "isSelected" $selecting;;
-			up) (( selecting-- )); [[ $selecting -lt 0 ]] && selecting=$(( ${#labels[@]} - 1 ));;
-			down) (( selecting++ )); [[ $selecting -ge ${#labels[@]} ]] && selecting=0;;
-			right) HMC::toggleOption "isSelected" $selecting;;
-			left) HMC::toggleOption "isSelected" $selecting;;
+			space) HMC::toggleOption "output" $order_selecting;;
+			up) (( order_selecting-- )); [[ $order_selecting -lt 0 ]] && order_selecting=$(( ${#label_list[@]} - 1 ));;
+			down) (( order_selecting++ )); [[ $order_selecting -ge ${#label_list[@]} ]] && order_selecting=0;;
+			right) HMC::toggleOption "output" $order_selecting;;
+			left) HMC::toggleOption "output" $order_selecting;;
 		esac
 	done
-	HMC::cursor show;
-	eval $output="(${isSelected[@]})";
+
+	HMC::cursor "show" "enable";
+
+	eval $output="(${output[@]})";
 }
 HMC::menu()
 {
-	local labels=(
-		"`HMC::format §t§3Install everything§r`"
-		"`HMC::format §tTermux Utilities§r`"
-		"`HMC::format §tUbuntu 22.04 LTS§r`"
-		"`HMC::format §t§aMongoDB CLI \& §eServer§r`"
-		"`HMC::format §t§aMongoDB §eServer§r`"
-		"`HMC::format §tSSH §eServer§r`"
-		"`HMC::format §t§3VSCode §eServer§r`"
-		"`HMC::format §tCustom Install Packages§r`"
+	local label_list=(
+		"§t§3Install everything§r"
+		"§tTermux Utilities§r"
+		"§tUbuntu 22.04 LTS§r"
+		"§t§aMongoDB CLI \& §eServer§r"
+		"§t§aMongoDB §eServer§r"
+		"§tSSH §eServer§r"
+		"§t§3VSCode §eServer§r"
+		"§tCustom Install Packages§r"
 	)
+	HMC::replaceColorText "label_list" ${label_list[@]}
 	local menu;
-	local label_string;
-	local defaults="true false"
-	for i in ${!labels[@]}; do
-		label_string+="${labels[$i]};";
+	local label_text;
+	local is_selected_list_text_default="true false"
+	for i in ${!label_list[@]}; do
+		label_text+="${label_list[$i]};";
 	done
-	HMC::installs "menu" "$label_string" "$defaults";
+	HMC::installs "menu" "$label_text" "$is_selected_list_text_default";
 	echo "HMC > ${menu[@]}"
 }
 #
