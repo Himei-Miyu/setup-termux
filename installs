@@ -118,7 +118,7 @@ HMC::keyInput()
 }
 #
 # เมนูสลับค่า จริง-เท็จ
-# ใช้คู่กับ function HMC::install
+# ใช้คู่กับ function HMC::installs
 #
 HMC::toggleOption()
 {	
@@ -132,35 +132,36 @@ HMC::toggleOption()
 # ลูกศรเลือกรายการติดตั้งแพคเกจ
 #
 #
-HMC::install()
+HMC::installs()
 {
-	local labels=(
-		"`HMC::format §t§3Install everything§r`"
-		"`HMC::format §tTermux Utilities§r`"
-		"`HMC::format §tUbuntu 22.04 LTS§r`"
-		"`HMC::format §t§aMongoDB CLI \& §eServer§r`"
-		"`HMC::format §t§aMongoDB §eServer§r`"
-		"`HMC::format §tSSH §eServer§r`"
-		"`HMC::format §t§3VSCode §eServer§r`"
-		"`HMC::format §tCustom Install Packages§r`"
-	)
+	local output="$1";
+	local labelsString="$2";
+	local -a labels;
+
+	IFS=';' read -r -a labels <<< "$labelsString";
+	
 	local -a isSelected;
-	local defaults=(false);
+	local defaultsChecked=($3);
+	local selecting=0;
+	local selected=`HMC::format §a§l✔§r`;
+	local colors=(`HMC::format §l` `HMC::format §r`);
+	
 	for i in ${!labels[@]}; do
-		isSelected+=("${defaults[$i]:-false}")
+		isSelected+=("${defaultsChecked[$i]:-false}")
 		printf "\n"
 	done
-	local selecting=0;
+
 	local lastRow=`HMC::cursor row`;
 	local firstRow=$(( $lastRow - ${#labels[@]} ));
-	local symbolChecked=`HMC::format §a§l✔§r`;
-	local colors=(`HMC::format §l` `HMC::format §r`)
+	
+	trap "HMC::cursor show;echo \"installing has canceled\"; break" SIGINT;
 	HMC::cursor show off;
+
 	while true; do
 		local idx=0;
 		for i in ${!labels[@]}; do
 			local prefix=" ";
-			[[ ${isSelected[$idx]} == "true" ]] && prefix="$symbolChecked"
+			[[ ${isSelected[$idx]} == "true" ]] && prefix="$selected";
 
 			HMC::cursor move $(( $firstRow + $idx ));
 			[[ $idx -eq $selecting ]] && echo "$prefix  ${colors[0]}${labels[$i]}${colors[1]}" || echo "$prefix ${labels[$i]} ";
@@ -176,6 +177,28 @@ HMC::install()
 		esac
 	done
 	HMC::cursor show;
+	eval $output="(${isSelected[@]})";
+}
+HMC::menu()
+{
+	local labels=(
+		"`HMC::format §t§3Install everything§r`"
+		"`HMC::format §tTermux Utilities§r`"
+		"`HMC::format §tUbuntu 22.04 LTS§r`"
+		"`HMC::format §t§aMongoDB CLI \& §eServer§r`"
+		"`HMC::format §t§aMongoDB §eServer§r`"
+		"`HMC::format §tSSH §eServer§r`"
+		"`HMC::format §t§3VSCode §eServer§r`"
+		"`HMC::format §tCustom Install Packages§r`"
+	)
+	local menu;
+	local label_string;
+	local defaults="true false"
+	for i in ${!labels[@]}; do
+		label_string+="${labels[$i]};";
+	done
+	HMC::installs "menu" "$label_string" "$defaults";
+	echo "HMC > ${menu[@]}"
 }
 #
 #
@@ -186,5 +209,15 @@ HMC::initial()
 	HMC::initializeVariable;
 	mkdir -p $HOME/.HMC && cd $HOME/.HMC;
 	touch errors.log installs.log
+	cd;
 }
 HMC::initial
+
+HMC::ram()
+{
+	local rawDatas=($(free | grep Mem))
+	rawDatas=(${rawDatas[@]:1:3})
+	for data in ${rawDatas[@]}; do
+		[[ $data -ge 1000000 ]] && echo "${data}"
+	done
+}
