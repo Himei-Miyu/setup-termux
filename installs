@@ -215,7 +215,7 @@ HMC::installs()
 
 			(( index++ ));
 		done
-		case `HMC::keyInput` in
+		case `HMC::getKeyInput` in
 			enter) break;;
 			space) HMC::toggleOption "output" $order_selecting;;
 			up) (( order_selecting-- )); [[ $order_selecting -lt 0 ]] && order_selecting=$(( ${#label_list[@]} - 1 ));;
