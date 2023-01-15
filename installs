@@ -76,7 +76,9 @@ HMC::replaceColorText()
 HMC::logMessage()
 {
 	local text="§l§f[§dH§5M§eC§f]§r§8:§a $@§r";
-	HMC::format $text;
+	local output;
+	HMC::replaceColorText "output" $text;
+	echo $output
 }
 #
 # แสดงข้อความเตือนเมื่อมีปัญหาแต่ไม่ร้ายแรง
@@ -85,7 +87,9 @@ HMC::logMessage()
 HMC::logWarn()
 {
 	local text="§l§f[§dH§5M§eC§f]§r§8:§e $@§r";
-	HMC::format $text;
+	local output;
+	HMC::replaceColorText "output" $text;
+	echo $output
 }
 #
 # แสดงข้อความผิดพลาดเมื่อล้มเหลวการทำงาน
@@ -94,7 +98,9 @@ HMC::logWarn()
 HMC::logError()
 {
 	local text="§l§f[§dH§5M§eC§f]§r§8:§c $@§r";
-	HMC::format $text;
+	local output;
+	HMC::replaceColorText "output" $text;
+	echo $output
 	exit 1;
 }
 #
