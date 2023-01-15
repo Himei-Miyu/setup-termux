@@ -65,7 +65,7 @@ HMC::replaceColorText()
 		s/§n/${_HMC_colors[20]}/g; \
 		s/§y/${_HMC_colors[21]}/g; \
 		s/§m/${_HMC_colors[22]}/g; \
-		" <<< ${rawText[$i]});
+		" <<< ${rawText[$i]}));
 	done
 	[[ ${#rawText[@]} -eq 1 ]] && eval $output="${text[0]}" || eval $output="(${text[@]})";
 }
