@@ -4,47 +4,76 @@
 # กำหนดตัวแปรเริ่มต้น
 # ต้องกำหนดเพื่อให้คำสั่งอื่นสามารถใช้งานได้
 #
-HMC::initializeVariable()
+HMC::initializeVariables()
 {
 	declare -ga _HMC_colors;
-	_HMC_colors[0]=$(printf "\e[0m");    # [ RESET ]
-	_HMC_colors[1]=$(printf "\e[34m");   # [ DARK BLUE ]
-	_HMC_colors[2]=$(printf "\e[32m");   # [ DARK GREEN ]
-	_HMC_colors[3]=$(printf "\e[36m");   # [ DARK AQUA ]
-	_HMC_colors[4]=$(printf "\e[31m");   # [ DARK RED ]
-	_HMC_colors[5]=$(printf "\e[35m");   # [ DARK PURPLE ]
-	_HMC_colors[6]=$(printf "\e[33m");   # [ GOLD ]
-	_HMC_colors[7]=$(printf "\e[37m");   # [ GRAY ]
-	_HMC_colors[8]=$(printf "\e[90m");   # [ DARK GRAY ]
-	_HMC_colors[9]=$(printf "\e[94m");   # [ BLUE ]
-	_HMC_colors[10]=$(printf "\e[30m");  # [ BLACK ]
-	_HMC_colors[11]=$(printf "\e[92m");  # [ GREEN ]
-	_HMC_colors[12]=$(printf "\e[94m");  # [ AQUA ]
-	_HMC_colors[13]=$(printf "\e[91m");  # [ LIGHT RED ]
-	_HMC_colors[14]=$(printf "\e[95m");  # [ PINK ]
-	_HMC_colors[15]=$(printf "\e[93m");  # [ YELLOW ]
-	_HMC_colors[16]=$(printf "\e[97m");  # [ WHITE ]
-	_HMC_colors[17]=$(printf "\e[1m");  # [ BOLD TEXT ]
-	_HMC_colors[18]=$(printf "\e[2m");  # [ FAINT TEXT ]
-	_HMC_colors[19]=$(printf "\e[3m");  # [ ITALIC TEXT ]
-	_HMC_colors[20]=$(printf "\e[4m");  # [ UNDERLINE TEXT ]
-	_HMC_colors[21]=$(printf "\e[7m");  # [ REVERSE _HMC_colors ]
-	_HMC_colors[22]=$(printf "\e[9m");  # [ STRIKETHROUGH TEXT ]
+	_HMC_colors[0]="$(printf "\e[0m")";    # [ RESET ]
+	_HMC_colors[1]="$(printf "\e[34m")";   # [ DARK BLUE ]
+	_HMC_colors[2]="$(printf "\e[32m")";   # [ DARK GREEN ]
+	_HMC_colors[3]="$(printf "\e[36m")";   # [ DARK AQUA ]
+	_HMC_colors[4]="$(printf "\e[31m")";   # [ DARK RED ]
+	_HMC_colors[5]="$(printf "\e[35m")";   # [ DARK PURPLE ]
+	_HMC_colors[6]="$(printf "\e[33m")";   # [ GOLD ]
+	_HMC_colors[7]="$(printf "\e[37m")";   # [ GRAY ]
+	_HMC_colors[8]="$(printf "\e[90m")";   # [ DARK GRAY ]
+	_HMC_colors[9]="$(printf "\e[94m")";   # [ BLUE ]
+	_HMC_colors[10]="$(printf "\e[30m")";  # [ BLACK ]
+	_HMC_colors[11]="$(printf "\e[92m")";  # [ GREEN ]
+	_HMC_colors[12]="$(printf "\e[94m")";  # [ AQUA ]
+	_HMC_colors[13]="$(printf "\e[91m")";  # [ LIGHT RED ]
+	_HMC_colors[14]="$(printf "\e[95m")";  # [ PINK ]
+	_HMC_colors[15]="$(printf "\e[93m")";  # [ YELLOW ]
+	_HMC_colors[16]="$(printf "\e[97m")";  # [ WHITE ]
+	_HMC_colors[17]="$(printf "\e[1m")";   # [ BOLD TEXT ]
+	_HMC_colors[18]="$(printf "\e[2m")";   # [ FAINT TEXT ]
+	_HMC_colors[19]="$(printf "\e[3m")";   # [ ITALIC TEXT ]
+	_HMC_colors[20]="$(printf "\e[4m")";   # [ UNDERLINE TEXT ]
+	_HMC_colors[21]="$(printf "\e[7m")";   # [ REVERSE _HMC_colors ]
+	_HMC_colors[22]="$(printf "\e[9m")";   # [ STRIKETHROUGH TEXT ]
 }
 #
 # เปลี่ยนข้อความให้มีสี
 #
 #
-HMC::format()
+HMC::replaceColorText()
 {
-	local rawText="$@";
-	echo -e "$(sed -r "s/§r/${_HMC_colors[0]}/g;s/§1/${_HMC_colors[1]}/g;s/§2/${_HMC_colors[2]}/g;s/§3/${_HMC_colors[3]}/g;s/§4/${_HMC_colors[4]}/g;s/§5/${_HMC_colors[5]}/g;s/§6/${_HMC_colors[6]}/g;s/§7/${_HMC_colors[7]}/g;s/§8/${_HMC_colors[8]}/g;s/§9/${_HMC_colors[9]}/g;s/§0/${_HMC_colors[10]}/g;s/§a/${_HMC_colors[11]}/g;s/§b/${_HMC_colors[12]}/g;s/§c/${_HMC_colors[13]}/g;s/§d/${_HMC_colors[14]}/g;s/§e/${_HMC_colors[15]}/g;s/§f/${_HMC_colors[16]}/g;s/§l/${_HMC_colors[17]}/g;s/§t/${_HMC_colors[18]}/g;s/§o/${_HMC_colors[19]}/g;s/§n/${_HMC_colors[20]}/g;s/§y/${_HMC_colors[21]}/g;s/§m/${_HMC_colors[22]}/g;" <<< $rawText)";
+	local output=$1;
+	local rawText=($2);
+	local -a text;
+	for i in ${!rawText[@]}; do
+		text+=($(sed -r "\
+		s/§r/${_HMC_colors[0]}/g; \
+		s/§1/${_HMC_colors[1]}/g; \
+		s/§2/${_HMC_colors[2]}/g; \
+		s/§3/${_HMC_colors[3]}/g; \
+		s/§4/${_HMC_colors[4]}/g; \
+		s/§5/${_HMC_colors[5]}/g; \
+		s/§6/${_HMC_colors[6]}/g; \
+		s/§7/${_HMC_colors[7]}/g; \
+		s/§8/${_HMC_colors[8]}/g; \
+		s/§9/${_HMC_colors[9]}/g; \
+		s/§0/${_HMC_colors[10]}/g; \
+		s/§a/${_HMC_colors[11]}/g; \
+		s/§b/${_HMC_colors[12]}/g; \
+		s/§c/${_HMC_colors[13]}/g; \
+		s/§d/${_HMC_colors[14]}/g; \
+		s/§e/${_HMC_colors[15]}/g; \
+		s/§f/${_HMC_colors[16]}/g; \
+		s/§l/${_HMC_colors[17]}/g; \
+		s/§t/${_HMC_colors[18]}/g; \
+		s/§o/${_HMC_colors[19]}/g; \
+		s/§n/${_HMC_colors[20]}/g; \
+		s/§y/${_HMC_colors[21]}/g; \
+		s/§m/${_HMC_colors[22]}/g; \
+		" <<< ${rawText[$i]});
+	done
+	[[ ${#rawText[@]} -eq 1 ]] && eval $output="${text[0]}" || eval $output="(${text[@]})";
 }
 #
 # แสดงข้อความปกติทั่วไป
 #
 #
-HMC::msg()
+HMC::logMessage()
 {
 	local text="§l§f[§dH§5M§eC§f]§r§8:§a $@§r";
 	HMC::format $text;
@@ -53,18 +82,18 @@ HMC::msg()
 # แสดงข้อความเตือนเมื่อมีปัญหาแต่ไม่ร้ายแรง
 #
 #
-HMC::warn()
+HMC::logWarn()
 {
-	local text="§l§f[§dH§5M§eC§f]§r§8:§e $@§r"
+	local text="§l§f[§dH§5M§eC§f]§r§8:§e $@§r";
 	HMC::format $text;
 }
 #
 # แสดงข้อความผิดพลาดเมื่อล้มเหลวการทำงาน
 # พร้อมส่งออก และคืนค่าสถานะ 1
 #
-HMC::error()
+HMC::logError()
 {
-	local text="§l§f[§dH§5M§eC§f]§r§8:§c $@§r"
+	local text="§l§f[§dH§5M§eC§f]§r§8:§c $@§r";
 	HMC::format $text;
 	exit 1;
 }
@@ -83,38 +112,37 @@ HMC::update()
 #
 HMC::cursor()
 {
-	[[ "show" == "$1" ]] &&
-		{
-			[[ "off" == "$2" ]] && printf "\e[?25l" || printf "\e[?25h";
-		}
-	[[ "move" == "$1" ]] && 
-		{
-			printf "\e[$2;${3:-1}H";
-		}
-	[[ "row" == "$1" ]] && 
-		{
+	case "$1" in
+		"get")
 			IFS=';' read -sdR -p $'\e[6n' ROW COL;
-			echo "${ROW#*[}";
-		}
+			[[ $2 == "row" ]] && echo "${ROW#*[}";
+			[[ $2 == "col" ]] && echo "${COW#*[}";
+			break;;
+		"show")
+			[[ "$2" == "enable" ]] && printf "\e[?25h";
+			[[ "$2" == "disable" ]] && printf "\e[?25l";
+			break;;
+		"moveto")
+			printf "\e[$2;${3:-1}H";
+			break;;
+		*) break;;
+	esac
 }
 #
 # รับ input จากแป้นพิมพ์
 #
 #
-HMC::keyInput()
+HMC::getKeyInput()
 {
 	local key;
-	IFS= read -rsn1 key;
+	IFS='' read -rsn1 key;
 	[[ -z "$key" ]] && echo enter;
-	[[ $'\x20' == "$key" ]] && echo space;
-	[[ $'\x1b' == "$key" ]] &&
-		{
-			read -rsn2 key;
-			[[ "[A" == "$key" ]] && echo up;
-			[[ "[B" == "$key" ]] && echo down;
-			[[ "[C" == "$key" ]] && echo right;
-			[[ "[D" == "$key" ]] && echo left;
-		}
+	[[ $key == " " ]] && echo space;
+	read -rsn2 key;
+	[[ "$key" == "[A" ]] && echo up;
+	[[ "$key" == "[B" ]] && echo down;
+	[[ "$key" == "[C" ]] && echo right;
+	[[ "$key" == "[D" ]] && echo left;
 }
 #
 # เมนูสลับค่า จริง-เท็จ
@@ -206,7 +234,7 @@ HMC::menu()
 #
 HMC::initial()
 {
-	HMC::initializeVariable;
+	HMC::initializeVariables;
 	mkdir -p $HOME/.HMC && cd $HOME/.HMC;
 	touch errors.log installs.log
 	cd;
