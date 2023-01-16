@@ -137,8 +137,8 @@ HMC::cursor() {
 			[[ $2 == "col" ]] && echo "${COW#*[}";
 			break;;
 		"show")
-			[[ "$2" == "enable" ]] && printf "\e[?25h";
-			[[ "$2" == "disable" ]] && printf "\e[?25l";
+			[[ "$2" == "enabled" ]] && printf "\e[?25h";
+			[[ "$2" == "disabled" ]] && printf "\e[?25l";
 			break;;
 		"moveto")
 			printf "\e[$2;${3:-1}H";
@@ -197,9 +197,9 @@ HMC::installs() {
 	local end_row=`HMC::cursor get row`;
 	local start_row=$(( $end_row - ${#label_list[@]} ));
 	
-	HMC::cursor "show" "disable";
+	HMC::cursor "show" "disabled";
 
-	trap "HMC::cursor 'show' 'enable';echo \"installing has canceled\"; break" SIGINT;
+	trap "HMC::cursor show enabled;echo \"installing has canceled\"; break" SIGINT;	
 
 	while true; do
 
@@ -227,7 +227,7 @@ HMC::installs() {
 		esac
 	done
 
-	HMC::cursor "show" "enable";
+	HMC::cursor "show" "enabled";
 
 	eval $output="(${output[@]})";
 }
