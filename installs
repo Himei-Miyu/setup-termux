@@ -165,7 +165,7 @@ HMC::getKeyInput() {
 #
 HMC::toggleOption() {	
 	local output=$1;
-	eval local is_selected=("\${${output}[@]}");
+	eval local is_selected=("\${${$2}[@]}");
 	local order_selecting=$2;
 	[[ "${is_selected[$order_selecting]}" == "true" ]] && is_selected[$order_selecting]="false" || is_selected[$order_selecting]="true";
 	eval $output='("${is_selected[@]}")';
@@ -217,11 +217,11 @@ HMC::installs() {
 		done
 		case `HMC::getKeyInput` in
 			enter) break;;
-			space) HMC::toggleOption "output" $order_selecting;;
+			space) HMC::toggleOption "is_selected" $order_selecting;;
 			up) (( order_selecting-- )); [[ $order_selecting -lt 0 ]] && order_selecting=$(( ${#label_list[@]} - 1 ));;
 			down) (( order_selecting++ )); [[ $order_selecting -ge ${#label_list[@]} ]] && order_selecting=0;;
-			right) HMC::toggleOption "output" $order_selecting;;
-			left) HMC::toggleOption "output" $order_selecting;;
+			right) HMC::toggleOption "is_selected" $order_selecting;;
+			left) HMC::toggleOption "is_selected" $order_selecting;;
 		esac
 	done
 
