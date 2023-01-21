@@ -25,10 +25,14 @@ HMC::installNginxCloudflareServer() {
     wait;
 
     cloudflared tunnel create "$tunnel_name";
+    [[ $? != 0 ]] && cloudflared tunnel delete "$tunnel_name" && cloudflared tunnel create "$tunnel_name";
 
     cloudflared tunnel route dns "$tunnel_name" "$url_website";
 
     cloudflared tunnel --url http://localhost:8080 run "$tunnel_name";
+    #
+    #cloudflared tunnel delete {tunnel_name}
+    #cloudflared tunnel list
 }
 
 HMC::installNginxCloudflareServer;
