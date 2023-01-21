@@ -2,8 +2,9 @@
 
 คำสั่งติดตั้งสำหรับ Termux app
 
-Download Termux Terminal ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux/))
-Download Termux API ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux.api/))
+### Download Termux Terminal ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux/))
+
+### Download Termux API ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux.api/))
 
 [✘] **Utility Packages**
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/utility-packages))

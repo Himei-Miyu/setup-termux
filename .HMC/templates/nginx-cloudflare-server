@@ -13,8 +13,8 @@ HMC::installNginxCloudflareServer() {
     local tunnel_name;
     local url_website;
 
-    read -p tunnel_name;
-    read -p url_website;
+    read -p "Tunnel Name : " tunnel_name;
+    read -p "URL Website : " url_website;
 
     HMC::update --full;
 
