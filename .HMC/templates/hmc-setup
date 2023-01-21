@@ -1,9 +1,14 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
 HMC::hmcSetup() {
+
     rm -rf termux-installs;
+
     pkg i -y git;
+
     git clone https://github.com/Miyu-Tenshi/termux-installs.git;
+
     return 0;
 }
+
 HMC::hmcSetup;
