@@ -17,7 +17,7 @@ HMC::update() {
     [[ "$option" =~ ^--silent|-s ]] && return 0;
     [[ "$option" =~ ^--yes|-y ]] && return 0;
     [[ "$option" =~ ^--default|-d ]] && return 0;
-    [[ "$option" =~ ^--full|-f ]] && apt-get Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade;
+    [[ "$option" =~ ^--full|-f ]] && apt-get -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade;
 
     return 0;
 }

@@ -40,7 +40,7 @@ curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/nginx-cloudflare-server))
  - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/nginx-cloudflare-server))
 ```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/nginx-cloudflare-server && . termux-installs/.HMC/templates/nginx-cloudflare-server;
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/hmc-setup | bash; . termux-installs/.HMC/templates/nginx-cloudflare-server;
 ```
 
 เพิ่มเติม ในกรณีเจอ error
