@@ -1,39 +1,42 @@
-# Termux Installs ✓
+# ✘✓ Termux Installs ✓✘
 
-[✓] **Termux Utilities**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/termux_utilities_install))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_utilities_install))
+คำสั่งติดตั้งสำหรับ Termux app
+
+Download Termux Terminal ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux/))
+Download Termux API ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux.api/))
+
+[✘] **Utility Packages**
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/utility-packages))
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/utility-packages))
 ```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/termux_utilities_install | bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/utility-packages | bash
 ```
-[✓] **Ubuntu LTS**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_install))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_install))
+[✘] **Ubuntu LTS**
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ubuntu-lts))
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ubuntu-lts))
 ```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_install | bash
-```
-[✘] **Ubuntu LTS Downgrade to v.20.04**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/ubuntu_lts_downgrade_to_20_install))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_downgrade_to_20_install))
-```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ubuntu_lts_downgrade_to_20_install | bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ubuntu-lts | bash
 ```
 [✘] **MongoDB CLI & Server**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/mongodb_cli_and_server_install))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mongodb_cli_and_server_install))
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-full-server))
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-full-server))
 ```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mongodb_cli_and_server_install | bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-full-server | bash
 ```
 [✘] **MongoDB Server**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/mongodb_server_install))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/mongodb_server_install))
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-server))
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-server))
 ```bash
 curl --
 ```
-[✘] **SSH Setup**
+[✘] **SSH Server**
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ssh-server))
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server))
 ```bash
-curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/ssh-setup | bash; read -p "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && echo -e "$PASSWORD\n$PASSWORD" | passwd;
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server | bash; read -p "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && echo -e "$PASSWORD\n$PASSWORD" | passwd;
 ```
+
+เพิ่มเติม ในกรณีเจอ error
 
 NO PUBLICKEY
 ```bash
