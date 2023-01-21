@@ -19,6 +19,8 @@ HMC::installNginxCloudflareServer() {
     
     wait;
 
+    echo "--== THIS ENDED ==--" && return 0;
+
     HMC::update --full;
 
     pkg i -y nginx cloudflared;
