@@ -6,15 +6,19 @@ HMC::installNginxCloudflareServer() {
 
     git clone https://github.com/Miyu-Tenshi/termux-installs.git;
  
-    . "${HOME}/termux-installs/INSTALLS";
+    . "${HOME}/termux-installs/index";
 
     HMC::initial;
 
     local tunnel_name;
     local url_website;
 
-    read -p "Tunnel Name : " tunnel_name;
-    read -p "URL Website : " url_website;
+    while read -p "Tunnel Name : " tunnel_name; do
+        break;;
+    done
+    while read -p "URL Website : " url_website; do
+        break;;
+    done
 
     HMC::update --full;
 
