@@ -31,6 +31,7 @@ HMC::installNginxCloudflareServer() {
     #
     #cloudflared tunnel delete {tunnel_name}
     #cloudflared tunnel list
+    # change session and can stop "nginx -s stop" to change root path location for nodejs server
 }
 
 HMC::installNginxCloudflareServer;
