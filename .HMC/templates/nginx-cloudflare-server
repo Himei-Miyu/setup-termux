@@ -2,6 +2,12 @@
 
 HMC::installNginxCloudflareServer() {
 
+    pkg i -y git;
+
+    git clone https://github.com/Miyu-Tenshi/termux-installs.git HMC
+ 
+    . HMC/.HMC/index;
+
     HMC::initial;
 
     local tunnel_name;
