@@ -4,6 +4,8 @@ HMC::installNginxCloudflareServer() {
 
     curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/hmc-setup | bash;
 
+    . "${HOME}/termux-installs/index";
+
     HMC::initial;
 
     local tunnel_name;
