@@ -4,9 +4,9 @@ HMC::installNginxCloudflareServer() {
 
     pkg i -y git;
 
-    git clone https://github.com/Miyu-Tenshi/termux-installs.git HMC
+    git clone https://github.com/Miyu-Tenshi/termux-installs.git;
  
-    . HMC/.HMC/index;
+    . "${HOME}/termux-installs/INSTALLS";
 
     HMC::initial;
 
