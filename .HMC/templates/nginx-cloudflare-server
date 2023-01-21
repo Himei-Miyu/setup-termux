@@ -12,26 +12,21 @@ HMC::installNginxCloudflareServer() {
     local url_website;
 
     read -p "Tunnel Name : " tunnel_name;
-    
-    wait;
-
     read -p "URL Website : " url_website;
-    
-    wait;
-
-    echo "--== THIS ENDED ==--" && return 0;
 
     HMC::update --full;
 
     pkg i -y nginx cloudflared;
 
+    nginx;
+
     cloudflared tunnel login;
 
-    cloudflared tunnel create "${tunnel_name:-HMC-nginx}";
+    cloudflared tunnel create "$tunnel_name";
 
-    cloudflared tunnel route dns "${tunnel_name:-HMC-nginx}" "${url_website:-hmc-nginx.com}";
+    cloudflared tunnel route dns "${tunnel_name:-HMC-nginx}" "$url_website";
 
-    cloudflared tunnel --url http://localhost:8080 run "${tunnel_name:-HMC-nginx}";
+    cloudflared tunnel --url http://localhost:8080 run "$tunnel_name";
 }
 
 HMC::installNginxCloudflareServer;

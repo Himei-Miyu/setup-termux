@@ -13,8 +13,11 @@ HMC::update() {
     local option="$1";
 
     [[ -z "$option" ]] && apt-get update;
-    [[ "$option" =~ ^--all ]] && apt-get update && apt-get dist-upgrade;
-    [[ "${option}" == "--full" ]] && apt-get "${opt_one}" "${opt_two}" dist-upgrade;
+    [[ "$option" =~ ^--all|-a ]] && apt-get update && apt-get dist-upgrade;
+    [[ "$option" =~ ^--silent|-s ]] && return 0;
+    [[ "$option" =~ ^--yes|-y ]] && return 0;
+    [[ "$option" =~ ^--default|-d ]] && return 0;
+    [[ "$option" =~ ^--full|-f ]] && apt-get Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade;
 
     return 0;
 }
