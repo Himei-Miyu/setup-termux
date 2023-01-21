@@ -27,13 +27,19 @@ curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-server))
  - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-server))
 ```bash
-curl --
+curl -sL
 ```
 [✘] **SSH Server**
  - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ssh-server))
  - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server))
 ```bash
 curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server | bash; read -p "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && echo -e "$PASSWORD\n$PASSWORD" | passwd;
+```
+[✘] **Nginx Server**
+ - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/.HMC/templates/nginx-server))
+ - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/.HMC/templates/nginx-server))
+```bash
+curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/.HMC/templates/nginx-server | bash;
 ```
 
 เพิ่มเติม ในกรณีเจอ error

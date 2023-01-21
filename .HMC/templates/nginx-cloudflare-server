@@ -1,0 +1,26 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+HMC::installNginxCloudflareServer() {
+
+    HMC::initial;
+
+    local tunnel_name;
+    local url_website;
+
+    read -p tunnel_name;
+    read -p url_website;
+
+    HMC::update --full;
+
+    pkg i -y nginx cloudflared;
+
+    cloudflared tunnel login;
+
+    cloudflared tunnel create "${tunnel_name:-HMC-nginx}";
+
+    cloudflared tunnel route dns "${tunnel_name:-HMC-nginx}" "${url_website:-hmc-nginx.com}";
+
+    cloudflared tunnel --url http://localhost:8080 run "${tunnel_name:-HMC-nginx}";
+}
+
+HMC::installNginxCloudflareServer;
