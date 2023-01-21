@@ -1,0 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+for cmd in $(ls .HMC/commands | grep .sh$); do
+    . .HMC/commands/${cmd};
+done

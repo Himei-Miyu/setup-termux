@@ -1,5 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# 
+#
+# @status Completed
 # @descriptions เปลี่ยนข้อความให้มีสี
 # @variable string | array
 # @params   string			- รับชื่อตัวแปรด้านนอก

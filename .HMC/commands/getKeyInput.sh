@@ -1,5 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
+#
+# @status Completed
+# @descriptions
+# @returns
+#
 HMC::getKeyInput() {
 
 	local key;

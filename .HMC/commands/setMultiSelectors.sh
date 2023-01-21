@@ -1,5 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
+#
+# @status Incomplete
+# @descriptions
+# @returns
+#
 HMC::setMultiSelectors() {
 
 	local var_text="$1" && shift;

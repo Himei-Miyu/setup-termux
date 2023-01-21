@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
 #
+# @status Incomplete
 # @descriptions กำหนดตัวแปรเริ่มต้น
 # 				ต้องกำหนดเพื่อให้คำสั่งอื่นสามารถใช้งานได้
 # @returns void

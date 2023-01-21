@@ -1,5 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
+#
+# @status Completed
+# @descriptions
+# @returns
+#
 HMC::setCursorVisible() {
 
 	[[ -z "$1" ]] && printf "%s : no arguments\n" "$FUNCNAME" && return 2;
