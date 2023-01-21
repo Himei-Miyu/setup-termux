@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+HMC::hmcSetup() {
+
+    rm -rf termux-installs;
+
+    pkg i -y git;
+
+    git clone https://github.com/Miyu-Tenshi/termux-installs.git;
+
+    . "${HOME}/termux-installs/index";
+
+    return 0;
+}
+
+HMC::hmcSetup;
