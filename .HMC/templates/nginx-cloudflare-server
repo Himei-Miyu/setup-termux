@@ -14,13 +14,11 @@ HMC::installNginxCloudflareServer() {
 
     HMC::update --full;
 
-    pkg i -y nginx cloudflared;
+    pkg i -y nginx cloudflared nodejs;
 
     nginx;
 
     cloudflared tunnel login;
-    
-    wait;
 
     cloudflared tunnel create "$tunnel_name";
     [[ $? != 0 ]] && cloudflared tunnel delete "$tunnel_name" && cloudflared tunnel create "$tunnel_name";
@@ -28,10 +26,11 @@ HMC::installNginxCloudflareServer() {
     cloudflared tunnel route dns "$tunnel_name" "$url_website";
 
     cloudflared tunnel --url http://localhost:8080 run "$tunnel_name";
-    #
-    #cloudflared tunnel delete {tunnel_name}
-    #cloudflared tunnel list
+    # cloudflared tunnel delete {tunnel_name}
+    # cloudflared tunnel list
     # change session and can stop "nginx -s stop" to change root path location for nodejs server
+    # reverse proxy สำหรับ Server ซ่อน IP Server                Client > internet > proxy > server
+    # forward proxy สำหรับ Client ใช้ IP Proxy เพื่อเข้าถึงข้อมูล      Client > proxy > internet
 }
 
 HMC::installNginxCloudflareServer;
