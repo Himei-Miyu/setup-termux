@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+[[ "$1" == "MongoDBFullServer" ]] && shift && $HOME/termux-installs/.HMC/templates/mongodb-full-server $@ && return 0;
+[[ "$1" == "MongoDBServer" ]] && shift && $HOME/termux-installs/.HMC/templates/mongodb-server $@ && return 0;
+[[ "$1" == "NginxCloudflareServer" ]] && shift && $HOME/termux-installs/.HMC/templates/nginx-cloudflare-server $@ && return 0;
+[[ "$1" == "SSHServer" ]] && shift && $HOME/termux-installs/.HMC/templates/ssh-server $@ && return 0;
+[[ "$1" == "UbuntuLTS" ]] && shift && $HOME/termux-installs/.HMC/templates/ubuntu-lts $@ && return 0;
+[[ "$1" == "UtilityPackages" ]] && shift && $HOME/termux-installs/.HMC/templates/utility-packages $@ && return 0;
+[[ "$1" == "VSCodeServer" ]] && shift && $HOME/termux-installs/.HMC/templates/vscode-server $@ && return 0;
