@@ -1,6 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#
-# run curl -sL setup.hmc.pw | bash; . INSTALLS; HMC::initTemplate {template}
-#
-. "$HOME/termux-installs/.HMC/index";
-export $PATH="$PATH/:$HOME/termux-installs/.HMC/bin";
