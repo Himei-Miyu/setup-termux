@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-cat > .index << EOF
+cat > .HMC-setup << EOF
     echo "[i] Update packages";
     apt-get -qq update && printf "\e[1A\e[2G✔\n";
     echo "[i] Upgrade packages";
