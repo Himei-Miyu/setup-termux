@@ -3,9 +3,9 @@
 HMC::setupEnv() {
 
     echo "[i] Update packages";
-    apt-get update && printf "\e[2A\e[2G✔\n";
+    apt-get -qq update && printf "\e[2A\e[2G✔\n";
     echo "[i] Upgrade packages";
-    apt-get -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && printf "\e[2A\e[2G✔\n";
+    apt-get -qq -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && printf "\e[2A\e[2G✔\n";
 
     return 0;
 }
