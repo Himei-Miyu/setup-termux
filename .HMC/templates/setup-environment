@@ -1,10 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 cat > .HMC-setup << EOF
-    (echo -e "[\e7i] Updating packages" && apt-get -qq update && echo -e "\e8✔] Update packages completed" && exit 0) &
-    (echo -e "[\e7i] Upgrading packages" && apt-get -qq -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && echo -e "\e8✔] Upgrade packages completed" && exit 0) &
-    echo -e "[i] Setting environments"
+    echo -e "[\e7i] Updating packages";
+    apt-get -qq update && echo -e "\e8✔] Update packages completed";
+    echo -e "[\e7i] Upgrading packages";
+    apt-get -qq -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && echo -e "\e8✔] Upgrade packages completed";
+    echo -e "[\e7i] Environments setup"
     export _HMC_PATH=$HOME/termux-installs/.HMC;
     export PATH=$PATH:$_HMC_PATH/bin;
-    printf "\e[1A\e[2G✔\n";
+    echo -e "[\e8✔] Environments setup completed"
 EOF
