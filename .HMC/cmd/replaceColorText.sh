@@ -16,7 +16,7 @@ HMC::replaceColorText() {
 
 	[[ ! "$var_text" == "--" ]] && {
 		for arg in "$@"; do
-			raw_text_list+="\"$arg\";;";
+			raw_text_list+="\"$arg\";";
 		done
 	} || raw_text_list="$@";
 
@@ -48,7 +48,7 @@ HMC::replaceColorText() {
 
 	[[ "$var_text" == "--" ]] && echo -e "$text_list" && return 0;
 
-	IFS=';;' read -ra text_list <<< "$text_list";
+	IFS=';' read -ra text_list <<< "$text_list";
 
 	eval $var_text="(${text_list[@]})";
 

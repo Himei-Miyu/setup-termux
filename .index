@@ -1,7 +1,14 @@
 #!/data/data/com.termux/files/usr/bin/bash
+#
+# set environment global for subprocess
+export _HMC_PATH=$HOME/termux-installs/.HMC;
+export PATH=$PATH:$_HMC_PATH/bin;
 
-export _HMC_PATH=$HOME/termux-installs/.HMC
-export PATH=$PATH:$_HMC_PATH/bin
-eval export `cat $_HMC_PATH/var/color`
-eval `ls $_HMC_PATH/cmd | sed s+^.*+source\ ${_HMC_PATH}/cmd/\&\;+g`
-chmod +x `ls $_HMC_PATH/bin | sed s+^.*+${_HMC_PATH}/bin/\&+g`
+# set multi environment color global
+eval export `cat $_HMC_PATH/var/color`;
+
+# retieve commands
+eval `ls $_HMC_PATH/cmd | sed s+^.*+source\ ${_HMC_PATH}/cmd/\&\;+g`;
+
+# allow executor to folder bin
+chmod +x `ls $_HMC_PATH/bin | sed s+^.*+${_HMC_PATH}/bin/\&+g`;

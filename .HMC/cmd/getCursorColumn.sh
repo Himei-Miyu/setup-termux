@@ -6,6 +6,9 @@
 #
 HMC::getCursorColumn() {
 
+	local ROW;
+	local COL;
+
 	IFS=';' read -sdR -p $'\e[6n' ROW COL;
 
 	echo ${COL#*[};
