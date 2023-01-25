@@ -1,5 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+cat >> .index << EOF
 HMC::setupEnv() {
 
     echo "[i] Update packages";
@@ -15,3 +16,4 @@ HMC::setupEnv() {
 }
 
 HMC::setupEnv;
+EOF
