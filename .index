@@ -1,3 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-. termux-installs/.HMC/.index
+export _HMC_PATH=$HOME/termux-installs/.HMC
+export PATH=$PATH:$_HMC_PATH/bin
+eval export `cat $_HMC_PATH/var/color`
+eval `ls $_HMC_PATH/cmd | sed s+^.*+source\ ${_HMC_PATH}/cmd/\&\;+g`
+chmod +x `ls $_HMC_PATH/bin | sed s+^.*+${_HMC_PATH}/bin/\&+g`
