@@ -3,9 +3,13 @@
 HMC::setupEnv() {
 
     echo "[i] Update packages";
-    apt-get -qq update && printf "\e[2A\e[2G✔\n";
+    apt-get -qq update && printf "\e[1A\e[2G✔\n";
     echo "[i] Upgrade packages";
-    apt-get -qq -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && printf "\e[2A\e[2G✔\n";
+    apt-get -qq -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && printf "\e[1A\e[2G✔\n";
+    echo "[i] Setting environments"
+    export _HMC_PATH=$HOME/termux-installs/.HMC;
+    export PATH=$PATH:$_HMC_PATH/bin;
+    printf "\e[1A\e[2G✔\n";
 
     return 0;
 }
