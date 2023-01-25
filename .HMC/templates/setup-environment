@@ -5,8 +5,8 @@ cat > .HMC-setup << EOF
     apt-get -qq update && echo -e "\e8✔] Update packages completed";
     echo -e "[\e7i] Upgrading packages";
     apt-get -qq -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && echo -e "\e8✔] Upgrade packages completed";
-    echo -e "[\e7i] Environments setup"
+    echo -e "[\e7i] Environments setup";
     export _HMC_PATH=$HOME/termux-installs/.HMC;
     export PATH=$PATH:$_HMC_PATH/bin;
-    echo -e "[\e8✔] Environments setup completed"
+    echo -e "\e8✔] Environments setup completed";
 EOF
