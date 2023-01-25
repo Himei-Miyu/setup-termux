@@ -1,8 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-cat >> .index << EOF
-HMC::setupEnv() {
-
+cat > .index << EOF
     echo "[i] Update packages";
     apt-get -qq update && printf "\e[1A\e[2G✔\n";
     echo "[i] Upgrade packages";
@@ -11,9 +9,4 @@ HMC::setupEnv() {
     export _HMC_PATH=$HOME/termux-installs/.HMC;
     export PATH=$PATH:$_HMC_PATH/bin;
     printf "\e[1A\e[2G✔\n";
-
-    return 0;
-}
-
-HMC::setupEnv;
 EOF
