@@ -1,7 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-
-for cmd in $(ls $HOME/termux-installs/.HMC/commands | grep .sh$); do
-    . "${HOME}/termux-installs/.HMC/commands/${cmd}";
-done
-
-cp $PREFIX/bin

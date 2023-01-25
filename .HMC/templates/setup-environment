@@ -1,0 +1,13 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+HMC::setupEnv() {
+
+    echo "[i] Update packages";
+    apt-get update && printf "\e[2A\e[2G✔\n";
+    echo "[i] Upgrade packages";
+    apt-get -o Dpkg::Options::=--force-confdef --allow-downgrades -y dist-upgrade && printf "\e[2A\e[2G✔\n";
+
+    return 0;
+}
+
+HMC::setupEnv;

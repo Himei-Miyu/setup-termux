@@ -10,5 +10,5 @@ eval export `cat $_HMC_PATH/var/color`;
 # retieve commands
 eval `ls $_HMC_PATH/cmd | sed s+^.*+source\ ${_HMC_PATH}/cmd/\&\;+g`;
 
-# allow executor to folder bin
+# allow executor permission file in bin
 chmod +x `ls $_HMC_PATH/bin | sed s+^.*+${_HMC_PATH}/bin/\&+g`;
