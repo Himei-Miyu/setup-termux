@@ -1,44 +1,62 @@
 # ✘✓ Termux Installs ✓✘
+Termux App
+- Download Termux [CLICK HERE](https://f-droid.org/packages/com.termux)
 
-คำสั่งติดตั้งสำหรับ Termux app
+|Plugin name|Description|Link Download
+|-|-|-
+|API    |get data in mobile|[CLICK HERE](https://f-droid.org/packages/com.termux.api)
+|Float  |small window in mobile|[CLICK HERE](https://f-droid.org/packages/com.termux.window)
+|Widget |shortcut in main screen|[CLICK HERE](https://f-droid.org/en/packages/com.termux.widget)
 
-### Download Termux Terminal ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux/))
+[✘] **Utility Packages** ( *Incompleted* )
+|Source|Raw
+|-|-
+|[🔍][SOURCE1]|[📦][RAW1]
 
-### Download Termux API ได้ที่นี่ -> ([Download](https://f-droid.org/packages/com.termux.api/))
-
-[✘] **Utility Packages**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/utility-packages))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/utility-packages))
 ```bash
 curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/utility-packages | bash
 ```
-[✘] **Ubuntu LTS**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ubuntu-lts))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ubuntu-lts))
+
+[✘] **Ubuntu LTS** ( *Incompleted* )
+|Source|Raw
+|-|-
+|[🔍][SOURCE2]|[📦][RAW2]
+
 ```bash
 curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ubuntu-lts | bash
 ```
-[✘] **MongoDB CLI & Server**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-full-server))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-full-server))
+
+[✘] **MongoDB CLI & Server** ( *Incompleted* )
+|Source|Raw
+|-|-
+|[🔍][SOURCE3]|[📦][RAW3]
+
 ```bash
 curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-full-server | bash
 ```
-[✘] **MongoDB Server**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-server))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-server))
+[✘] **MongoDB Server** ( *Incompleted* )
+|Source|Raw
+|-|-
+|[🔍][SOURCE4]|[📦][RAW4]
+
 ```bash
 curl -sL
 ```
-[✘] **SSH Server**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ssh-server))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server))
+
+[✘] **SSH Server** ( *Incompleted* )
+|Source|Raw
+|-|-
+|[🔍][SOURCE5]|[📦][RAW5]
+
 ```bash
 curl -sL https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server | bash; read -p "$(printf "\e[1m")password :$(printf "\e[2m") " PASSWORD && echo -e "$PASSWORD\n$PASSWORD" | passwd;
 ```
-[✘] **Nginx Server**
- - 🔍 ([Source](https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/nginx-cloudflare-server))
- - 📦 ([Raw](https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/nginx-cloudflare-server))
+
+[✘] **Nginx Server** ( *Incompleted* )
+|Source|Raw
+|-|-
+|[🔍][SOURCE6]|[📦][RAW6]
+
 ```bash
 curl -sL setup.hmc.pw | bash; . termux-installs/.HMC/templates/nginx-cloudflare-server;
 ```
@@ -49,3 +67,22 @@ NO PUBLICKEY
 ```bash
 apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-key {key}
 ```
+
+[//]: UtilityPackages
+[SOURCE1]: https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/utility-packages
+[RAW1]: https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/utility-packages
+[//]: UbuntuLTS
+[SOURCE2]: https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ubuntu-lts
+[RAW2]: https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ubuntu-lts
+[//]: MongoDBCLI&Server
+[SOURCE3]: https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-full-server
+[RAW3]: https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-full-server
+[//]: MongoDBServer
+[SOURCE4]: https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/mongodb-server
+[RAW4]: https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/mongodb-server
+[//]: SSHServer
+[SOURCE5]: https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/ssh-server
+[RAW5]: https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/ssh-server
+[//]: NginxServer
+[SOURCE6]: https://github.com/Miyu-Tenshi/termux-installs/blob/main/.HMC/templates/nginx-cloudflare-server
+[RAW6]: https://raw.githubusercontent.com/Miyu-Tenshi/termux-installs/main/.HMC/templates/nginx-cloudflare-server
